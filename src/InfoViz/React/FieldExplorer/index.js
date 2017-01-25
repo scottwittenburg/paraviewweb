@@ -18,14 +18,23 @@ export default class FieldExplorer extends React.Component {
     this.selectedFields = null;
 
     // Autobinding
-    // this.filterOptions = this.filterOptions.bind(this);
+    this.fieldSearchUpdated = this.fieldSearchUpdated.bind(this);
   }
 
   // One-time initialization.
   componentWillMount() {
-    // this.subscriptions.push();
     this.selectedFields = FieldSelector.newInstance({ provider: this.props.provider });
     this.unselectedFields = FieldSelector.newInstance({ provider: this.props.provider });
+
+    // this.subscriptions.push();
+  }
+
+  componentDidMount() {
+    this.selectedFields.setFieldsToRender();
+    this.selectedFields.render();
+
+    this.unselectedFields.setFieldsToRender();
+    this.unselectedFields.render();
   }
 
   componentWillUnmount() {
@@ -41,6 +50,14 @@ export default class FieldExplorer extends React.Component {
     this.selectedFields = null;
   }
 
+  fieldSearchUpdated(newVal) {
+    this.selectedFields.setFieldsToRender();
+    this.selectedFields.render();
+
+    this.unselectedFields.setFieldsToRender();
+    this.unselectedFields.render();
+  }
+
   render() {
     return (
       <div className={style.container}>
@@ -48,7 +65,7 @@ export default class FieldExplorer extends React.Component {
           <ComponentToReact className={style.fullSize} component={this.selectedFields} />
         </div>
         <div style={{ position: 'absolute', top: 'calc(50% - 30px)', height: 30, width: '100%' }}>
-          <FieldSearch provider={this.props.provider} />
+          <FieldSearch provider={this.props.provider} onChosenOptionFinalized={this.fieldSearchUpdated} />
         </div>
         <div style={{ overflow: 'auto', position: 'absolute', bottom: 0, width: '100%', height: 'calc(50% - 30px)' }}>
           <ComponentToReact className={style.fullSize} component={this.unselectedFields} />

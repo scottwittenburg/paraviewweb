@@ -6,9 +6,8 @@ import                 ReactDOM from 'react-dom';
 
 import   CompositeClosureHelper from '../../../../Common/Core/CompositeClosureHelper';
 import            FieldExplorer from '../../FieldExplorer';
-import       FieldHoverProvider from '../../../../InfoViz/Core/FieldHoverProvider';
-import FieldInformationProvider from '../../../../InfoViz/Core/FieldInformationProvider';
 import            FieldProvider from '../../../../InfoViz/Core/FieldProvider';
+import      Histogram1DProvider from '../../../../InfoViz/Core/Histogram1DProvider';
 import           LegendProvider from '../../../../InfoViz/Core/LegendProvider';
 import                dataModel from '../../../Native/HistogramSelector/example/state.json';
 
@@ -20,14 +19,16 @@ d3.select('body').style('overflow', 'hidden'); // Safari otherwise intercepts wh
 const provider = CompositeClosureHelper.newInstance((publicAPI, model, initialValues = {}) => {
   Object.assign(model, initialValues);
   FieldProvider.extend(publicAPI, model, initialValues);
-  FieldHoverProvider.extend(publicAPI, model, initialValues);
-  FieldInformationProvider.extend(publicAPI, model, initialValues);
+  Histogram1DProvider.extend(publicAPI, model, initialValues);
   LegendProvider.extend(publicAPI, model, initialValues);
 })(dataModel);
+
 provider.setFieldsSorted(true);
 provider.getFieldNames().forEach((name) => {
   provider.addLegendEntry(name);
 });
 provider.assignLegend(['colors', 'shapes']);
+
+console.log('Done initializing the provider');
 
 ReactDOM.render(<FieldExplorer provider={provider} />, document.querySelector('.content'));

@@ -108,6 +108,11 @@ export default class FieldSearch extends React.Component {
       this.props.provider.setFieldHoverState(hover);
     }
     this.setState({ selectedFields: [subject] });
+
+    if (this.props.onChosenOptionFinalized) {
+      this.props.onChosenOptionFinalized(optionValue);
+    }
+
     return optionValue;
   }
 
@@ -191,6 +196,7 @@ export default class FieldSearch extends React.Component {
 
 FieldSearch.propTypes = {
   provider: React.PropTypes.object,
+  onChosenOptionFinalized: React.PropTypes.func,
   size: React.PropTypes.string,
 };
 
