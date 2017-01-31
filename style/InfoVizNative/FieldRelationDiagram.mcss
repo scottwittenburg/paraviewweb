@@ -76,3 +76,7 @@
 .diskTransform {
   fill: none;
 }
+
+.axisLabelSvg {
+  vertical-align: middle;
+}
