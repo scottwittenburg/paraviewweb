@@ -406,13 +406,16 @@ function histogramSelector(publicAPI, model) {
       return;
     }
 
-    const updateBoxPerRow = updateSizeInformation(model.singleModeName !== null);
+    let updateBoxPerRow = updateSizeInformation(model.singleModeName !== null);
 
     let fieldNames = getCurrentFieldNames();
 
     updateHeader(fieldNames.length);
     if (model.singleModeName !== null) {
       // display only one histogram at a time.
+      if (fieldNames[0] !== model.singleModeName) {
+        updateBoxPerRow = true;
+      }
       fieldNames = [model.singleModeName];
     }
 
@@ -801,6 +804,8 @@ function histogramSelector(publicAPI, model) {
     });
 
     model.subscriptions.push(model.provider.onFieldChange((field) => {
+      console.log('HistogramSelector noticed a field change');
+      console.log(field);
       Object.assign(model.fieldData[field.name], field);
       publicAPI.render();
     }));
