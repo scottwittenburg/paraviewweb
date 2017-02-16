@@ -588,6 +588,11 @@ function histogramSelector(publicAPI, model) {
       const dataActive = def.active;
       // Apply legend
       if (model.provider.isA('LegendProvider')) {
+        // FIXME: In the debugger, this next line was getting called hundreds of times
+        // while the histograms were being drawn.  Also with the histos pushed
+        // due to the histgram1d data subscriber subscription update, the organization
+        // of the def object was wrong.  If I just did "def = def.obj" in the console
+        // before execution of the next line, I didn't get the stack trace in the console.
         const { color, shape } = model.provider.getLegend(def.name);
         legendCell
           .html(`<svg class='${style.legendSvg}' width='${legendSize}' height='${legendSize}'
@@ -787,6 +792,13 @@ function histogramSelector(publicAPI, model) {
     });
   }
 
+  function createFieldData(fieldName) {
+    return Object.assign(
+      model.fieldData[fieldName] || {},
+      model.provider.getField(fieldName),
+      scoreHelper.defaultFieldData());
+  }
+
   // Auto unmount on destroy
   model.subscriptions.push({ unsubscribe: publicAPI.setContainer });
 
@@ -797,17 +809,26 @@ function histogramSelector(publicAPI, model) {
     }
 
     fieldNames.forEach((name) => {
-      model.fieldData[name] = Object.assign(
-        model.fieldData[name] || {},
-        model.provider.getField(name),
-        scoreHelper.defaultFieldData());
+      model.fieldData[name] = createFieldData(name);
     });
 
     model.subscriptions.push(model.provider.onFieldChange((field) => {
       console.log('HistogramSelector noticed a field change');
       console.log(field);
-      Object.assign(model.fieldData[field.name], field);
-      publicAPI.render();
+      if (model.fieldData[field.name]) {
+        Object.assign(model.fieldData[field.name], field);
+        publicAPI.render();
+      } else {
+        model.fieldData[name] = createFieldData(field.name);
+        // FIXME: Do I need to pass all fields here, or just the ones to which
+        // I haven't subscribed in the past?
+        model.histogram1DDataSubscription.update(
+          [field.name],
+          {
+            numberOfBins: model.numberOfBins,
+            partial: true,
+          });
+      }
     }));
   }
 
@@ -828,7 +849,17 @@ function histogramSelector(publicAPI, model) {
             model.fieldData[name].hobj = data[name];
             scoreHelper.rescaleDividers(name, oldRangeMin, oldRangeMax);
           } else {
-            model.fieldData[name].hobj = data[name];
+            // FIXME Why do I need to dig in and get the 'hobj' element on the right hand side?
+            // That doesn't seem to have been necessary in the block above...  Ah, and it
+            // turns out not to help anyway.  I still end up finding out that I would need to
+            // set "def = def.hobj" as mentioned in one of the "FIXME" above.
+            /* eslint-disable no-lonely-if */
+            if (data[name].hobj) {
+            /* eslint-enable no-lonely-if */
+              model.fieldData[name].hobj = data[name].hobj;
+            } else {
+              model.fieldData[name].hobj = data[name];
+            }
           }
         });
 
