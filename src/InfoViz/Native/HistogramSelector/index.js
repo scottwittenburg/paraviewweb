@@ -424,7 +424,7 @@ function histogramSelector(publicAPI, model) {
 
       // get the data and put it into the nest based on the
       // number of boxesPerRow
-      const mungedData = fieldNames.map((name) => {
+      const mungedData = fieldNames.filter(name => model.fieldData[name]).map((name) => {
         const d = model.fieldData[name];
         return d;
       });
@@ -819,7 +819,7 @@ function histogramSelector(publicAPI, model) {
         Object.assign(model.fieldData[field.name], field);
         publicAPI.render();
       } else {
-        model.fieldData[name] = createFieldData(field.name);
+        model.fieldData[field.name] = createFieldData(field.name);
         // FIXME: Do I need to pass all fields here, or just the ones to which
         // I haven't subscribed in the past?
         model.histogram1DDataSubscription.update(
@@ -849,17 +849,18 @@ function histogramSelector(publicAPI, model) {
             model.fieldData[name].hobj = data[name];
             scoreHelper.rescaleDividers(name, oldRangeMin, oldRangeMax);
           } else {
+            model.fieldData[name].hobj = data[name];
             // FIXME Why do I need to dig in and get the 'hobj' element on the right hand side?
             // That doesn't seem to have been necessary in the block above...  Ah, and it
             // turns out not to help anyway.  I still end up finding out that I would need to
             // set "def = def.hobj" as mentioned in one of the "FIXME" above.
-            /* eslint-disable no-lonely-if */
-            if (data[name].hobj) {
-            /* eslint-enable no-lonely-if */
-              model.fieldData[name].hobj = data[name].hobj;
-            } else {
-              model.fieldData[name].hobj = data[name];
-            }
+            // /* eslint-disable no-lonely-if */
+            // if (data[name].hobj) {
+            // /* eslint-enable no-lonely-if */
+            //   model.fieldData[name].hobj = data[name].hobj;
+            // } else {
+            //   model.fieldData[name].hobj = data[name];
+            // }
           }
         });
 
