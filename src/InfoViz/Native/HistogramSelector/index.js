@@ -820,10 +820,8 @@ function histogramSelector(publicAPI, model) {
         publicAPI.render();
       } else {
         model.fieldData[field.name] = createFieldData(field.name);
-        // FIXME: Do I need to pass all fields here, or just the ones to which
-        // I haven't subscribed in the past?
         model.histogram1DDataSubscription.update(
-          [field.name],
+          model.provider.getFieldNames(),
           {
             numberOfBins: model.numberOfBins,
             partial: true,
