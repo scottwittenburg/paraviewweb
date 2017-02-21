@@ -406,29 +406,20 @@ function histogramSelector(publicAPI, model) {
       return;
     }
 
-    let updateBoxPerRow = updateSizeInformation(model.singleModeName !== null);
-
+    const updateBoxPerRow = updateSizeInformation(model.singleModeName !== null);
     let fieldNames = getCurrentFieldNames();
 
     updateHeader(fieldNames.length);
     if (model.singleModeName !== null) {
       // display only one histogram at a time.
-      if (fieldNames[0] !== model.singleModeName) {
-        updateBoxPerRow = true;
-      }
       fieldNames = [model.singleModeName];
     }
 
-    // FIXME: the fieldNames.length check is a temporary test which effectively
-    // makes us re-populate the nest each time we render.  This fixes two issues:
-    //
-    // 1) switching around between single histograms is broken when the single
-    // histogram is also the first in the entire dataset (alphabetically)
-    //
-    // 2) when new parameters are added dynamically, the histogram selector
-    // only updates itself to show those new histograms sometimes (usually
-    // the first time at least, then maybe other times as well)
-    if (fieldNames.length > 0 || updateBoxPerRow || fieldNames.length !== lastNumFields) {
+    // If we find down the road that it's too expensive to re-populate the nest
+    // all the time, we can try to come up with the proper guards that make sure
+    // we do whenever we need it, but not more.  For now, we just make sure we
+    // always get the updates we need.
+    if (fieldNames.length > 0) {
       lastNumFields = fieldNames.length;
 
       // get the data and put it into the nest based on the
@@ -903,9 +894,7 @@ function histogramSelector(publicAPI, model) {
         if (annotation.selection.type === 'partition') {
           const fieldName = annotation.selection.partition.variable;
           if (model.fieldData[fieldName]) {
-            model.fieldData[fieldName].annotation = null;
-            model.fieldData[fieldName].dividers = undefined;
-            model.fieldData[fieldName].editScore = false;
+            scoreHelper.clearFieldAnnotation(fieldName);
             publicAPI.render(fieldName);
           }
         }

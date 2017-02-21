@@ -116,7 +116,7 @@ export default function init(inPublicAPI, inModel) {
   }
 
   // communicate with the server which regions/dividers have changed.
-  function sendScores(def) {
+  function sendScores(def, passive = false) {
     const scoreData = dividersToPartition(def, model.scores);
     if (scoreData === null) {
       console.error('Cannot translate scores to send to provider');
@@ -128,7 +128,13 @@ export default function init(inPublicAPI, inModel) {
       }
       // FIXME: We need an improved check to prevent this happening in the case
       // where the histogram selector is in single-field/no-edit mode
-      model.provider.setAnnotation(scoreData);
+      if (!passive) {
+        model.provider.setAnnotation(scoreData);
+      } else if (model.provider.isA('AnnotationStoreProvider') && model.provider.getStoredAnnotation(scoreData.id)) {
+        model.provider.updateStoredAnnotations({
+          [scoreData.id]: scoreData,
+        });
+      }
     }
   }
 
@@ -861,20 +867,22 @@ export default function init(inPublicAPI, inModel) {
   function rescaleDividers(paramName, oldRangeMin, oldRangeMax) {
     if (model.fieldData[paramName] && model.fieldData[paramName].hobj) {
       const def = model.fieldData[paramName];
-      const hobj = model.fieldData[paramName].hobj;
-      if (hobj.min !== oldRangeMin || hobj.max !== oldRangeMax) {
-        def.dividers.forEach((divider, index) => {
-          if (oldRangeMax === oldRangeMin) {
-            // space dividers evenly in the middle - i.e. punt.
-            divider.value = (((index + 1) / (def.dividers.length + 1)) *
-                             (hobj.max - hobj.min)) + hobj.min;
-          } else {
-            // this set the divider to hobj.min if the new hobj.min === hobj.max.
-            divider.value = (((divider.value - oldRangeMin) / (oldRangeMax - oldRangeMin)) *
-                             (hobj.max - hobj.min)) + hobj.min;
-          }
-        });
-        sendScores(def);
+      if (showScore(def)) {
+        const hobj = model.fieldData[paramName].hobj;
+        if (hobj.min !== oldRangeMin || hobj.max !== oldRangeMax) {
+          def.dividers.forEach((divider, index) => {
+            if (oldRangeMax === oldRangeMin) {
+              // space dividers evenly in the middle - i.e. punt.
+              divider.value = (((index + 1) / (def.dividers.length + 1)) *
+                               (hobj.max - hobj.min)) + hobj.min;
+            } else {
+              // this set the divider to hobj.min if the new hobj.min === hobj.max.
+              divider.value = (((divider.value - oldRangeMin) / (oldRangeMax - oldRangeMin)) *
+                               (hobj.max - hobj.min)) + hobj.min;
+            }
+          });
+          sendScores(def, true);
+        }
       }
     }
   }
@@ -1136,6 +1144,13 @@ export default function init(inPublicAPI, inModel) {
     }
   }
 
+  function clearFieldAnnotation(fieldName) {
+    model.fieldData[fieldName].annotation = null;
+    model.fieldData[fieldName].dividers = undefined;
+    model.fieldData[fieldName].regions = [model.defaultScore];
+    model.fieldData[fieldName].editScore = false;
+  }
+
   return {
     addSubscriptions,
     createGroups,
@@ -1153,6 +1168,7 @@ export default function init(inPublicAPI, inModel) {
     rescaleDividers,
     updateHeader,
     updateFieldAnnotations,
+    clearFieldAnnotation,
     updateScoreIcons,
   };
 }
