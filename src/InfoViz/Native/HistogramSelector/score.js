@@ -126,6 +126,8 @@ export default function init(inPublicAPI, inModel) {
       if (!scoreData.name) {
         scoreData.name = `${scoreData.selection.partition.variable} (partition)`;
       }
+      // FIXME: We need an improved check to prevent this happening in the case
+      // where the histogram selector is in single-field/no-edit mode
       model.provider.setAnnotation(scoreData);
     }
   }

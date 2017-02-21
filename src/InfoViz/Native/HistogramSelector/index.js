@@ -419,7 +419,16 @@ function histogramSelector(publicAPI, model) {
       fieldNames = [model.singleModeName];
     }
 
-    if (updateBoxPerRow || fieldNames.length !== lastNumFields) {
+    // FIXME: the fieldNames.length check is a temporary test which effectively
+    // makes us re-populate the nest each time we render.  This fixes two issues:
+    //
+    // 1) switching around between single histograms is broken when the single
+    // histogram is also the first in the entire dataset (alphabetically)
+    //
+    // 2) when new parameters are added dynamically, the histogram selector
+    // only updates itself to show those new histograms sometimes (usually
+    // the first time at least, then maybe other times as well)
+    if (fieldNames.length > 0 || updateBoxPerRow || fieldNames.length !== lastNumFields) {
       lastNumFields = fieldNames.length;
 
       // get the data and put it into the nest based on the
