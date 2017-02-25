@@ -813,13 +813,15 @@ function histogramSelector(publicAPI, model) {
     });
 
     model.subscriptions.push(model.provider.onFieldChange((field) => {
-      console.log('HistogramSelector noticed a field change');
-      console.log(field);
-      if (model.fieldData[field.name]) {
+      console.log('HistogramSelector noticed a field change: ', field);
+
+      if (field && model.fieldData[field.name]) {
         Object.assign(model.fieldData[field.name], field);
         publicAPI.render();
       } else {
-        model.fieldData[field.name] = createFieldData(field.name);
+        if (field) {
+          model.fieldData[field.name] = createFieldData(field.name);
+        }
         model.histogram1DDataSubscription.update(
           model.provider.getFieldNames(),
           {

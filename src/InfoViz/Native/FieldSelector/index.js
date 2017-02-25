@@ -267,9 +267,10 @@ function fieldSelector(publicAPI, model) {
 
   model.subscriptions.push({ unsubscribe: publicAPI.setContainer });
 
-  model.subscriptions.push(model.provider.onFieldChange((field) => {
+  model.subscriptions.push(model.provider.onFieldChange(() => {
     publicAPI.render();
-    model.histogram1DDataSubscription.update([field.name],
+    model.histogram1DDataSubscription.update(
+      model.provider.getFieldNames(),
       {
         numberOfBins: model.numberOfBins,
         partial: true,
