@@ -547,7 +547,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "groupcontrol": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -556,7 +557,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "str",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -565,7 +567,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "str",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -574,7 +577,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "str",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -596,7 +600,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 3
+      "size": 3,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "list-1",
@@ -609,7 +614,8 @@
       },
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -617,7 +623,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -625,7 +632,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -634,7 +642,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -642,7 +651,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -656,7 +666,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -678,7 +689,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 3
+      "size": 3,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "list-1",
@@ -691,7 +703,8 @@
       },
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -699,7 +712,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -707,7 +721,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -716,7 +731,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -724,7 +740,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -738,7 +755,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -760,7 +778,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 3
+      "size": 3,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "list-1",
@@ -773,7 +792,8 @@
       },
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -781,7 +801,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -789,7 +810,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -798,7 +820,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -806,7 +829,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -820,7 +844,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -830,7 +855,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -839,7 +865,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": -1
+      "size": -1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -848,7 +875,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": -1
+      "size": -1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -871,7 +899,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": -1
+      "size": -1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -880,7 +909,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -889,7 +919,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -898,7 +929,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -907,7 +939,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -917,7 +950,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -939,7 +973,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 3
+      "size": 3,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "list-1",
@@ -952,7 +987,8 @@
       },
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -960,7 +996,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -968,7 +1005,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -977,7 +1015,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -985,7 +1024,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -999,7 +1039,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1021,7 +1062,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 3
+      "size": 3,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "list-1",
@@ -1034,7 +1076,8 @@
       },
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -1042,7 +1085,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -1050,7 +1094,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1059,7 +1104,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -1067,7 +1113,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1081,7 +1128,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1103,7 +1151,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 3
+      "size": 3,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "list-1",
@@ -1116,7 +1165,8 @@
       },
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -1124,7 +1174,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -1132,7 +1183,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1141,7 +1193,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -1149,7 +1202,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1163,7 +1217,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "list-1",
@@ -1177,7 +1232,8 @@
       },
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1187,7 +1243,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -1196,7 +1253,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1205,7 +1263,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 0
+      "size": 0,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "list-1",
@@ -1219,7 +1278,8 @@
       },
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1229,7 +1289,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -1238,7 +1299,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1247,7 +1309,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 0
+      "size": 0,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "list-1",
@@ -1261,7 +1324,8 @@
       },
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1271,7 +1335,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "checkbox",
@@ -1280,7 +1345,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "int",
       "advanced": 0,
-      "size": 1
+      "size": 1,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "textfield",
@@ -1289,7 +1355,8 @@
       "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
       "type": "float",
       "advanced": 0,
-      "size": 0
+      "size": 0,
+      "group": "DataAxesGrid"
     },
     {
       "widget": "list-1",
