@@ -531,765 +531,771 @@
       "size": 1
     },
     {
-      "widget": "list-1",
-      "name": "Data Axes Grid",
-      "values": {
-        "GridAxesRepresentation": "397"
-      },
-      "type": "proxy",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Grid Axes Visibility",
-      "doc": "Used for the checkbox in the UI.",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "X Title",
-      "doc": "\n          Set the title string for X axis.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "str",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Y Title",
-      "doc": "\n          Set the title string for Y axis.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "str",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Z Title",
-      "doc": "\n          Set the title string for Z axis.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "str",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Color",
-      "range": [
+      "widget": "group",
+      "name": "Grid Axes",
+      "children": [
         {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "list-1",
+          "name": "Data Axes Grid",
+          "values": {
+            "GridAxesRepresentation": "397"
+          },
+          "type": "proxy",
+          "advanced": 0,
+          "size": 1
         },
         {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "checkbox",
+          "name": "Grid Axes Visibility",
+          "doc": "Used for the checkbox in the UI.",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
         },
         {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "textfield",
+          "name": "X Title",
+          "doc": "\n          Set the title string for X axis.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "str",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Y Title",
+          "doc": "\n          Set the title string for Y axis.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "str",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Z Title",
+          "doc": "\n          Set the title string for Z axis.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "str",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Color",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
+        },
+        {
+          "widget": "list-1",
+          "name": "Font Family",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "values": {
+            "Arial": 0,
+            "Courier": 1,
+            "Times": 2
+          },
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Bold",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Italic",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Font Size",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Shadow",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Opacity",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Color",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
+        },
+        {
+          "widget": "list-1",
+          "name": "Font Family",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "values": {
+            "Arial": 0,
+            "Courier": 1,
+            "Times": 2
+          },
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Bold",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Italic",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Font Size",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Shadow",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Opacity",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Color",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
+        },
+        {
+          "widget": "list-1",
+          "name": "Font Family",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "values": {
+            "Arial": 0,
+            "Courier": 1,
+            "Times": 2
+          },
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Bold",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Italic",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Font Size",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Shadow",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Opacity",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Faces To Render",
+          "doc": "\n          Set the mask to select faces. The faces rendered will be a subset of the\n          faces selected depending on the status of **CullBackface** and\n          **CullFrontface** properties.\n        ",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Cull Backface",
+          "doc": "\n              Set to true to hide faces of the grid facing away from the camera i.e. hide all\n              back faces.\n            ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": -1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Cull Frontface",
+          "doc": "\n              Set to true to hide faces of the grid facing towards from the camera i.e. hide all\n              front faces.\n            ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": -1
+        },
+        {
+          "widget": "textfield",
+          "name": "Grid Color",
+          "doc": "Color used when coloring the grid wireframe",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": -1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Show Grid",
+          "doc": "\n          Turn off to not render the plane grids.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Show Edges",
+          "doc": "\n          Turn off to not render the plane edges.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Show Ticks",
+          "doc": "\n          Turn off to not render the tick marks.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Label Unique Edges Only",
+          "doc": "\n          Set to true to only label edges shared with 1 face. Note that\n          if all faces are being rendered, this will generate no labels.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Axes To Label",
+          "doc": "\n          Set the mask to select the axes to label. The axes labelled will be a subset of the\n          axes selected depending on which faces are also being rendered.\n        ",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Color",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
+        },
+        {
+          "widget": "list-1",
+          "name": "Font Family",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "values": {
+            "Arial": 0,
+            "Courier": 1,
+            "Times": 2
+          },
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Bold",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Italic",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Font Size",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Shadow",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Opacity",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Color",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
+        },
+        {
+          "widget": "list-1",
+          "name": "Font Family",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "values": {
+            "Arial": 0,
+            "Courier": 1,
+            "Times": 2
+          },
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Bold",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Italic",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Font Size",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Shadow",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Opacity",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Color",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
+        },
+        {
+          "widget": "list-1",
+          "name": "Font Family",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "values": {
+            "Arial": 0,
+            "Courier": 1,
+            "Times": 2
+          },
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Bold",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Italic",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Font Size",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Shadow",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Opacity",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "list-1",
+          "name": "X Axis Notation",
+          "doc": "\n          Get/set the numerical notation, standard, scientific or mixed (0, 1, 2) for X Axis.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "values": {
+            "Mixed": 0,
+            "Fixed": 2,
+            "Scientific": 1
+          },
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "X Axis Precision",
+          "doc": "\n          Get/set the numerical precision to use for the X Axis, default is 2.\n        ",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "X Axis Use Custom Labels",
+          "doc": "\n          Specify whether to use custom labels for the X axis. Labels\n          specified by **XAxisLabels** are used only when\n          this flag is set to 1.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "X Axis Labels",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 0
+        },
+        {
+          "widget": "list-1",
+          "name": "Y Axis Notation",
+          "doc": "\n          Get/set the numerical notation, standard, scientific or mixed (0, 1, 2) for Y Axis.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "values": {
+            "Mixed": 0,
+            "Fixed": 2,
+            "Scientific": 1
+          },
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Y Axis Precision",
+          "doc": "\n          Get/set the numerical precision to use for the Y Axis, default is 2.\n        ",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Y Axis Use Custom Labels",
+          "doc": "\n          Specify whether to use custom labels for the Y axis. Labels\n          specified by **YAxisLabels** are used only when\n          this flag is set to 1.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Y Axis Labels",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 0
+        },
+        {
+          "widget": "list-1",
+          "name": "Z Axis Notation",
+          "doc": "\n          Get/set the numerical notation, standard, scientific or mixed (0, 1, 2) for Z Axis.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "values": {
+            "Mixed": 0,
+            "Fixed": 2,
+            "Scientific": 1
+          },
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Z Axis Precision",
+          "doc": "\n          Get/set the numerical precision to use for the Z Axis, default is 2.\n        ",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Z Axis Use Custom Labels",
+          "doc": "\n          Specify whether to use custom labels for the Z axis. Labels\n          specified by **ZAxisLabels** are used only when\n          this flag is set to 1.\n        ",
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Z Axis Labels",
+          "range": [],
+          "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 0
         }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "list-1",
-      "name": "Font Family",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "values": {
-        "Arial": 0,
-        "Courier": 1,
-        "Times": 2
-      },
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Bold",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Italic",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Font Size",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Shadow",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Opacity",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Color",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "list-1",
-      "name": "Font Family",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "values": {
-        "Arial": 0,
-        "Courier": 1,
-        "Times": 2
-      },
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Bold",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Italic",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Font Size",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Shadow",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Opacity",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Color",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "list-1",
-      "name": "Font Family",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "values": {
-        "Arial": 0,
-        "Courier": 1,
-        "Times": 2
-      },
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Bold",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Italic",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Font Size",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Shadow",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Opacity",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Faces To Render",
-      "doc": "\n          Set the mask to select faces. The faces rendered will be a subset of the\n          faces selected depending on the status of **CullBackface** and\n          **CullFrontface** properties.\n        ",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Cull Backface",
-      "doc": "\n              Set to true to hide faces of the grid facing away from the camera i.e. hide all\n              back faces.\n            ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": -1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Cull Frontface",
-      "doc": "\n              Set to true to hide faces of the grid facing towards from the camera i.e. hide all\n              front faces.\n            ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": -1
-    },
-    {
-      "widget": "textfield",
-      "name": "Grid Color",
-      "doc": "Color used when coloring the grid wireframe",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": -1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Show Grid",
-      "doc": "\n          Turn off to not render the plane grids.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Show Edges",
-      "doc": "\n          Turn off to not render the plane edges.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Show Ticks",
-      "doc": "\n          Turn off to not render the tick marks.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Label Unique Edges Only",
-      "doc": "\n          Set to true to only label edges shared with 1 face. Note that\n          if all faces are being rendered, this will generate no labels.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Axes To Label",
-      "doc": "\n          Set the mask to select the axes to label. The axes labelled will be a subset of the\n          axes selected depending on which faces are also being rendered.\n        ",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Color",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "list-1",
-      "name": "Font Family",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "values": {
-        "Arial": 0,
-        "Courier": 1,
-        "Times": 2
-      },
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Bold",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Italic",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Font Size",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Shadow",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Opacity",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Color",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "list-1",
-      "name": "Font Family",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "values": {
-        "Arial": 0,
-        "Courier": 1,
-        "Times": 2
-      },
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Bold",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Italic",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Font Size",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Shadow",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Opacity",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Color",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        },
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "list-1",
-      "name": "Font Family",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "values": {
-        "Arial": 0,
-        "Courier": 1,
-        "Times": 2
-      },
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Bold",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Italic",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Font Size",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Shadow",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Opacity",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "list-1",
-      "name": "X Axis Notation",
-      "doc": "\n          Get/set the numerical notation, standard, scientific or mixed (0, 1, 2) for X Axis.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "values": {
-        "Mixed": 0,
-        "Fixed": 2,
-        "Scientific": 1
-      },
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "X Axis Precision",
-      "doc": "\n          Get/set the numerical precision to use for the X Axis, default is 2.\n        ",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "X Axis Use Custom Labels",
-      "doc": "\n          Specify whether to use custom labels for the X axis. Labels\n          specified by **XAxisLabels** are used only when\n          this flag is set to 1.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "X Axis Labels",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 0
-    },
-    {
-      "widget": "list-1",
-      "name": "Y Axis Notation",
-      "doc": "\n          Get/set the numerical notation, standard, scientific or mixed (0, 1, 2) for Y Axis.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "values": {
-        "Mixed": 0,
-        "Fixed": 2,
-        "Scientific": 1
-      },
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Y Axis Precision",
-      "doc": "\n          Get/set the numerical precision to use for the Y Axis, default is 2.\n        ",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Y Axis Use Custom Labels",
-      "doc": "\n          Specify whether to use custom labels for the Y axis. Labels\n          specified by **YAxisLabels** are used only when\n          this flag is set to 1.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Y Axis Labels",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 0
-    },
-    {
-      "widget": "list-1",
-      "name": "Z Axis Notation",
-      "doc": "\n          Get/set the numerical notation, standard, scientific or mixed (0, 1, 2) for Z Axis.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "values": {
-        "Mixed": 0,
-        "Fixed": 2,
-        "Scientific": 1
-      },
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Z Axis Precision",
-      "doc": "\n          Get/set the numerical precision to use for the Z Axis, default is 2.\n        ",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Z Axis Use Custom Labels",
-      "doc": "\n          Specify whether to use custom labels for the Z axis. Labels\n          specified by **ZAxisLabels** are used only when\n          this flag is set to 1.\n        ",
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Z Axis Labels",
-      "range": [],
-      "depends": "596:DataAxesGrid:GridAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 0
+      ]
     },
     {
       "widget": "list-1",
@@ -2602,372 +2608,377 @@
       "id": "596"
     },
     {
-      "name": "DataAxesGrid",
-      "value": "GridAxesRepresentation",
-      "id": "596"
-    },
-    {
-      "name": "GridAxesVisibility",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "XTitle",
-      "value": "X Axis",
-      "id": "397"
-    },
-    {
-      "name": "YTitle",
-      "value": "Y Axis",
-      "id": "397"
-    },
-    {
-      "name": "ZTitle",
-      "value": "Z Axis",
-      "id": "397"
-    },
-    {
-      "name": "XTitleColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "397"
-    },
-    {
-      "name": "XTitleFontFamily",
-      "value": "Arial",
-      "id": "397"
-    },
-    {
-      "name": "XTitleBold",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "XTitleItalic",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "XTitleFontSize",
-      "value": 12,
-      "id": "397"
-    },
-    {
-      "name": "XTitleShadow",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "XTitleOpacity",
-      "value": 1.0,
-      "id": "397"
-    },
-    {
-      "name": "YTitleColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "397"
-    },
-    {
-      "name": "YTitleFontFamily",
-      "value": "Arial",
-      "id": "397"
-    },
-    {
-      "name": "YTitleBold",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "YTitleItalic",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "YTitleFontSize",
-      "value": 12,
-      "id": "397"
-    },
-    {
-      "name": "YTitleShadow",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "YTitleOpacity",
-      "value": 1.0,
-      "id": "397"
-    },
-    {
-      "name": "ZTitleColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "397"
-    },
-    {
-      "name": "ZTitleFontFamily",
-      "value": "Arial",
-      "id": "397"
-    },
-    {
-      "name": "ZTitleBold",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "ZTitleItalic",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "ZTitleFontSize",
-      "value": 12,
-      "id": "397"
-    },
-    {
-      "name": "ZTitleShadow",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "ZTitleOpacity",
-      "value": 1.0,
-      "id": "397"
-    },
-    {
-      "name": "FacesToRender",
-      "value": 63,
-      "id": "397"
-    },
-    {
-      "name": "CullBackface",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "CullFrontface",
-      "value": 1,
-      "id": "397"
-    },
-    {
-      "name": "GridColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "397"
-    },
-    {
-      "name": "ShowGrid",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "ShowEdges",
-      "value": 1,
-      "id": "397"
-    },
-    {
-      "name": "ShowTicks",
-      "value": 1,
-      "id": "397"
-    },
-    {
-      "name": "LabelUniqueEdgesOnly",
-      "value": 1,
-      "id": "397"
-    },
-    {
-      "name": "AxesToLabel",
-      "value": 63,
-      "id": "397"
-    },
-    {
-      "name": "XLabelColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "397"
-    },
-    {
-      "name": "XLabelFontFamily",
-      "value": "Arial",
-      "id": "397"
-    },
-    {
-      "name": "XLabelBold",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "XLabelItalic",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "XLabelFontSize",
-      "value": 12,
-      "id": "397"
-    },
-    {
-      "name": "XLabelShadow",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "XLabelOpacity",
-      "value": 1.0,
-      "id": "397"
-    },
-    {
-      "name": "YLabelColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "397"
-    },
-    {
-      "name": "YLabelFontFamily",
-      "value": "Arial",
-      "id": "397"
-    },
-    {
-      "name": "YLabelBold",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "YLabelItalic",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "YLabelFontSize",
-      "value": 12,
-      "id": "397"
-    },
-    {
-      "name": "YLabelShadow",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "YLabelOpacity",
-      "value": 1.0,
-      "id": "397"
-    },
-    {
-      "name": "ZLabelColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "397"
-    },
-    {
-      "name": "ZLabelFontFamily",
-      "value": "Arial",
-      "id": "397"
-    },
-    {
-      "name": "ZLabelBold",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "ZLabelItalic",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "ZLabelFontSize",
-      "value": 12,
-      "id": "397"
-    },
-    {
-      "name": "ZLabelShadow",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "ZLabelOpacity",
-      "value": 1.0,
-      "id": "397"
-    },
-    {
-      "name": "XAxisNotation",
-      "value": "Mixed",
-      "id": "397"
-    },
-    {
-      "name": "XAxisPrecision",
-      "value": 2,
-      "id": "397"
-    },
-    {
-      "name": "XAxisUseCustomLabels",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "XAxisLabels",
-      "value": [],
-      "id": "397"
-    },
-    {
-      "name": "YAxisNotation",
-      "value": "Mixed",
-      "id": "397"
-    },
-    {
-      "name": "YAxisPrecision",
-      "value": 2,
-      "id": "397"
-    },
-    {
-      "name": "YAxisUseCustomLabels",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "YAxisLabels",
-      "value": [],
-      "id": "397"
-    },
-    {
-      "name": "ZAxisNotation",
-      "value": "Mixed",
-      "id": "397"
-    },
-    {
-      "name": "ZAxisPrecision",
-      "value": 2,
-      "id": "397"
-    },
-    {
-      "name": "ZAxisUseCustomLabels",
-      "value": 0,
-      "id": "397"
-    },
-    {
-      "name": "ZAxisLabels",
-      "value": [],
-      "id": "397"
+      "collapsed": true,
+      "children": [
+        {
+          "name": "DataAxesGrid",
+          "value": "GridAxesRepresentation",
+          "id": "596"
+        },
+        {
+          "name": "GridAxesVisibility",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "XTitle",
+          "value": "X Axis",
+          "id": "397"
+        },
+        {
+          "name": "YTitle",
+          "value": "Y Axis",
+          "id": "397"
+        },
+        {
+          "name": "ZTitle",
+          "value": "Z Axis",
+          "id": "397"
+        },
+        {
+          "name": "XTitleColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "397"
+        },
+        {
+          "name": "XTitleFontFamily",
+          "value": "Arial",
+          "id": "397"
+        },
+        {
+          "name": "XTitleBold",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "XTitleItalic",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "XTitleFontSize",
+          "value": 12,
+          "id": "397"
+        },
+        {
+          "name": "XTitleShadow",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "XTitleOpacity",
+          "value": 1.0,
+          "id": "397"
+        },
+        {
+          "name": "YTitleColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "397"
+        },
+        {
+          "name": "YTitleFontFamily",
+          "value": "Arial",
+          "id": "397"
+        },
+        {
+          "name": "YTitleBold",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "YTitleItalic",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "YTitleFontSize",
+          "value": 12,
+          "id": "397"
+        },
+        {
+          "name": "YTitleShadow",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "YTitleOpacity",
+          "value": 1.0,
+          "id": "397"
+        },
+        {
+          "name": "ZTitleColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "397"
+        },
+        {
+          "name": "ZTitleFontFamily",
+          "value": "Arial",
+          "id": "397"
+        },
+        {
+          "name": "ZTitleBold",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "ZTitleItalic",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "ZTitleFontSize",
+          "value": 12,
+          "id": "397"
+        },
+        {
+          "name": "ZTitleShadow",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "ZTitleOpacity",
+          "value": 1.0,
+          "id": "397"
+        },
+        {
+          "name": "FacesToRender",
+          "value": 63,
+          "id": "397"
+        },
+        {
+          "name": "CullBackface",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "CullFrontface",
+          "value": 1,
+          "id": "397"
+        },
+        {
+          "name": "GridColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "397"
+        },
+        {
+          "name": "ShowGrid",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "ShowEdges",
+          "value": 1,
+          "id": "397"
+        },
+        {
+          "name": "ShowTicks",
+          "value": 1,
+          "id": "397"
+        },
+        {
+          "name": "LabelUniqueEdgesOnly",
+          "value": 1,
+          "id": "397"
+        },
+        {
+          "name": "AxesToLabel",
+          "value": 63,
+          "id": "397"
+        },
+        {
+          "name": "XLabelColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "397"
+        },
+        {
+          "name": "XLabelFontFamily",
+          "value": "Arial",
+          "id": "397"
+        },
+        {
+          "name": "XLabelBold",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "XLabelItalic",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "XLabelFontSize",
+          "value": 12,
+          "id": "397"
+        },
+        {
+          "name": "XLabelShadow",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "XLabelOpacity",
+          "value": 1.0,
+          "id": "397"
+        },
+        {
+          "name": "YLabelColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "397"
+        },
+        {
+          "name": "YLabelFontFamily",
+          "value": "Arial",
+          "id": "397"
+        },
+        {
+          "name": "YLabelBold",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "YLabelItalic",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "YLabelFontSize",
+          "value": 12,
+          "id": "397"
+        },
+        {
+          "name": "YLabelShadow",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "YLabelOpacity",
+          "value": 1.0,
+          "id": "397"
+        },
+        {
+          "name": "ZLabelColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "397"
+        },
+        {
+          "name": "ZLabelFontFamily",
+          "value": "Arial",
+          "id": "397"
+        },
+        {
+          "name": "ZLabelBold",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "ZLabelItalic",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "ZLabelFontSize",
+          "value": 12,
+          "id": "397"
+        },
+        {
+          "name": "ZLabelShadow",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "ZLabelOpacity",
+          "value": 1.0,
+          "id": "397"
+        },
+        {
+          "name": "XAxisNotation",
+          "value": "Mixed",
+          "id": "397"
+        },
+        {
+          "name": "XAxisPrecision",
+          "value": 2,
+          "id": "397"
+        },
+        {
+          "name": "XAxisUseCustomLabels",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "XAxisLabels",
+          "value": [],
+          "id": "397"
+        },
+        {
+          "name": "YAxisNotation",
+          "value": "Mixed",
+          "id": "397"
+        },
+        {
+          "name": "YAxisPrecision",
+          "value": 2,
+          "id": "397"
+        },
+        {
+          "name": "YAxisUseCustomLabels",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "YAxisLabels",
+          "value": [],
+          "id": "397"
+        },
+        {
+          "name": "ZAxisNotation",
+          "value": "Mixed",
+          "id": "397"
+        },
+        {
+          "name": "ZAxisPrecision",
+          "value": 2,
+          "id": "397"
+        },
+        {
+          "name": "ZAxisUseCustomLabels",
+          "value": 0,
+          "id": "397"
+        },
+        {
+          "name": "ZAxisLabels",
+          "value": [],
+          "id": "397"
+        }
+      ]
     },
     {
       "name": "PolarAxes",
