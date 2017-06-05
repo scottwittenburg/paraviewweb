@@ -67,9 +67,16 @@ export default React.createClass({
     const properties = {};
     const ctx = { advanced: this.props.advanced, filter: this.props.filter, properties };
     const changeSetCount = Object.keys(this.state.changeSet).length;
-    this.state.properties.forEach((p) => {
-      properties[p.data.id] = p.data.value;
-    });
+
+    function extractProperties(p) {
+      if (p.ui.propType === 'group') {
+        p.children.forEach(extractProperties);
+      } else {
+        properties[p.data.id] = p.data.value;
+      }
+    }
+
+    this.state.properties.forEach(extractProperties);
 
     return (
       <div className={style.container}>
