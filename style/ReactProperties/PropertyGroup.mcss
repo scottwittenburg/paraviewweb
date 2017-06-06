@@ -29,8 +29,7 @@
 }
 
 .icon {
-  /*margin-left: 10px;*/
-  width: 20px;
+  width: 15px;
 }
 
 .expandedIcon {
