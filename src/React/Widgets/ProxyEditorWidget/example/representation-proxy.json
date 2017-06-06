@@ -1298,834 +1298,840 @@
       ]
     },
     {
-      "widget": "list-1",
+      "widget": "group",
       "name": "Polar Axes",
-      "values": {
-        "PolarAxesRepresentation": "412"
-      },
-      "type": "proxy",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Visibility",
-      "doc": "Set the visibility of the representation.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Translation",
-      "doc": "Set the polar axes origin position.",
-      "range": [],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "textfield",
-      "name": "Scale",
-      "doc": "Set the polar axes bounds transform scale.",
-      "range": [],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "textfield",
-      "name": "Orientation",
-      "doc": "Set the polar axes bounds transform orientation.",
-      "range": [],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "textfield",
-      "name": "Enable Custom Bounds",
-      "doc": "Activate the use of polar axes custom bounds.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 1,
-      "size": 3
-    },
-    {
-      "widget": "textfield",
-      "name": "Custom Bounds",
-      "doc": "Set the polar axes custom bounds.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 6
-    },
-    {
-      "widget": "checkbox",
-      "name": "Enable Custom Range",
-      "doc": "Activate the use of polar axes custom range.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Custom Range",
-      "doc": "Set the polar axes custom range.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 2
-    },
-    {
-      "widget": "checkbox",
-      "name": "Polar Axis Visibility",
-      "doc": "Set the visibility of polar axis.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Radial Axes Visibility",
-      "doc": "Set all radial axes visibility.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Draw Radial Gridlines",
-      "doc": "Set the visibility of radial grid lines.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Polar Arcs Visibility",
-      "doc": "Set all polar arcs visibility.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Draw Polar Arcs Gridlines",
-      "doc": "Set the visibility of polar arcs grid lines.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Number Of Radial Axes",
-      "doc": "Set the number of radial axes,\n        If value is 0 (the default), the number of radial axes is automatically calculated.\n        ",
-      "range": [
+      "children": [
         {
-          "max": 100,
-          "min": 0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Auto Subdivide Polar Axis",
-      "doc": "Automatically compute the number of\n        polar axis ticks and tick size. If true, will override NumberOfPolarAxisTicks,\n        PolarAxisMajorTickSize, LastRadialAxisMajorTickSize, ArcMajorTickSize properties.\n        ",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Number Of Polar Axis",
-      "doc": "Set the number of polar axis and of course polar axis ticks,\n        If value is 0 (the default), the number of polar axis tick\n        is automatically calculated.\n        ignored if AutoSubdividePolarAxis is true.",
-      "range": [
-        {
-          "max": 100,
-          "min": 0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Minimum Radius",
-      "doc": "Set the minimum radius, Maximum radius is automatically computed.",
-      "range": [
-        {
-          "max": 100.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Minimum Angle",
-      "doc": "Set the minimum angle.",
-      "range": [
-        {
-          "max": 180.0,
-          "min": -180.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Maximum Angle",
-      "doc": "Set the maximum angle.",
-      "range": [
-        {
-          "max": 180.0,
-          "min": -180.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Radial Axes Origin To Polar Axis",
-      "doc": "If On, the radial axes are drawn from the angle of the polar Axis\n        (i.e. MinimumAngle) and continue counterclockwise with the step DeltaAngleRadialAxes.\n        if Off, the start angle is 0.0.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Ratio",
-      "doc": "Set the polar ellipse ratio.",
-      "range": [
-        {
-          "max": 100.0,
-          "min": 0.001
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Polar Axis Color",
-      "doc": "Set the Polar Axis color.",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "list-1",
+          "name": "Polar Axes",
+          "values": {
+            "PolarAxesRepresentation": "412"
+          },
+          "type": "proxy",
+          "advanced": 1,
+          "size": 1
         },
         {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "checkbox",
+          "name": "Visibility",
+          "doc": "Set the visibility of the representation.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
         },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "textfield",
-      "name": "Polar Arcs Color",
-      "doc": "Set the Polar Arcs color.",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "textfield",
+          "name": "Translation",
+          "doc": "Set the polar axes origin position.",
+          "range": [],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
         },
         {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "textfield",
+          "name": "Scale",
+          "doc": "Set the polar axes bounds transform scale.",
+          "range": [],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
         },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "textfield",
-      "name": "Last Radial Axis Color",
-      "doc": "Set the Last Radial Axis color.",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "textfield",
+          "name": "Orientation",
+          "doc": "Set the polar axes bounds transform orientation.",
+          "range": [],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
         },
         {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "textfield",
+          "name": "Enable Custom Bounds",
+          "doc": "Activate the use of polar axes custom bounds.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 1,
+          "size": 3
         },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "textfield",
-      "name": "Secondary Polar Arcs Color",
-      "doc": "Set the Secondary Polar Arcs color.",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "textfield",
+          "name": "Custom Bounds",
+          "doc": "Set the polar axes custom bounds.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 6
         },
         {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "checkbox",
+          "name": "Enable Custom Range",
+          "doc": "Activate the use of polar axes custom range.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
         },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "textfield",
-      "name": "Secondary Radial Axes Color",
-      "doc": "Set the Secondary Radial Axes color.",
-      "range": [
-        {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "textfield",
+          "name": "Custom Range",
+          "doc": "Set the polar axes custom range.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 2
         },
         {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "checkbox",
+          "name": "Polar Axis Visibility",
+          "doc": "Set the visibility of polar axis.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
         },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 0,
-      "size": 3
-    },
-    {
-      "widget": "checkbox",
-      "name": "Polar Axis Title Visibility",
-      "doc": "Set the visibility of polar axis title.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Polar Axis Title",
-      "doc": "Set the polar axis title.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "str",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "list-1",
-      "name": "Polar Axis Title Location",
-      "doc": "Set the location of polar axis title.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "values": {
-        "Extern": 1,
-        "Bottom": 0
-      },
-      "type": "int",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Polar Label Visibility",
-      "doc": "Set the visibility of polar axis label.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Polar Label Format",
-      "doc": "Set the polar axis label format.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "str",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "list-1",
-      "name": "Polar Label Exponent Location",
-      "doc": "Set the location of exponent.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "values": {
-        "Extern": 1,
-        "Labels": 2,
-        "Bottom": 0
-      },
-      "type": "int",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Radial Label Visibility",
-      "doc": "Set radial label visibility.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Radial Label Format",
-      "doc": "Set the polar radial label format.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "str",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "list-1",
-      "name": "Radial Label Location",
-      "doc": "Set the location of radial labels.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "values": {
-        "Extern": 1,
-        "Bottom": 0
-      },
-      "type": "int",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Radial Units Visibility",
-      "doc": "Show radial units in labels (degrees).",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Screen Size",
-      "doc": "Set the screen size to use, which impact label and title\n        relative location to the axes.",
-      "range": [
+          "widget": "checkbox",
+          "name": "Radial Axes Visibility",
+          "doc": "Set all radial axes visibility.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
         {
-          "max": 100.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Enable Distance LOD",
-      "doc": "Set the use of LOD based on distance.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Distance LODThreshold",
-      "doc": "Set the LOD distance threshold to use.",
-      "range": [
+          "widget": "checkbox",
+          "name": "Draw Radial Gridlines",
+          "doc": "Set the visibility of radial grid lines.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 1,
+          "size": 1
+        },
         {
-          "max": 100.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Enable View Angle LOD",
-      "doc": "Set the use of LOD based on the View Angle.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "View Angle LODThreshold",
-      "doc": "Set the LOD View Angle threshold to use.",
-      "range": [
+          "widget": "checkbox",
+          "name": "Polar Arcs Visibility",
+          "doc": "Set all polar arcs visibility.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
         {
-          "max": 360.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Smallest Visible Polar Angle",
-      "doc": "Set the smallest radial angle distinguishable from polar axis.",
-      "range": [
+          "widget": "checkbox",
+          "name": "Draw Polar Arcs Gridlines",
+          "doc": "Set the visibility of polar arcs grid lines.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 1,
+          "size": 1
+        },
         {
-          "max": 2.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Polar Ticks Visibility",
-      "doc": "Set all ticks visibility.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Arc Ticks Origin To Polar Axis",
-      "doc": "If On, the ticks are drawn from the angle of the polar Axis\n        (MinimumAngle) and continue counterclockwise with the step Delta Angle Major/Minor.\n        If Off, the start angle is 0.0",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "list-1",
-      "name": "Tick Location",
-      "doc": "Set the location of ticks.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "values": {
-        "Both": 2,
-        "Inside": 0,
-        "Outside": 1
-      },
-      "type": "int",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Axis Tick Visibility",
-      "doc": "Set polar axis and last radial axis tick visibility.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Axis Minor Tick Visibility",
-      "doc": "Set polar axis and last radial axis minor tick visibility.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Arc Tick Visibility",
-      "doc": "Set polar arc tick visibility.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Arc Minor Tick Visibility",
-      "doc": "Set polar arc minor tick visibility.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Delta Angle Major",
-      "doc": "Set the delta between major ticks on last arc.",
-      "range": [
+          "widget": "textfield",
+          "name": "Number Of Radial Axes",
+          "doc": "Set the number of radial axes,\n        If value is 0 (the default), the number of radial axes is automatically calculated.\n        ",
+          "range": [
+            {
+              "max": 100,
+              "min": 0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
         {
-          "max": 359.0,
-          "min": 1.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Delta Angle Minor",
-      "doc": "Set the delta between minor and major ticks on last arc.",
-      "range": [
+          "widget": "checkbox",
+          "name": "Auto Subdivide Polar Axis",
+          "doc": "Automatically compute the number of\n        polar axis ticks and tick size. If true, will override NumberOfPolarAxisTicks,\n        PolarAxisMajorTickSize, LastRadialAxisMajorTickSize, ArcMajorTickSize properties.\n        ",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
         {
-          "max": 359.0,
-          "min": 1.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Polar Axis Major Tick Size",
-      "doc": "Set the polar axis major tick size,\n        If value is 0 (the default), tick size is automatically calculated.\n        ",
-      "range": [
+          "widget": "textfield",
+          "name": "Number Of Polar Axis",
+          "doc": "Set the number of polar axis and of course polar axis ticks,\n        If value is 0 (the default), the number of polar axis tick\n        is automatically calculated.\n        ignored if AutoSubdividePolarAxis is true.",
+          "range": [
+            {
+              "max": 100,
+              "min": 0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Polar Axis Tick Ratio Size",
-      "doc": "Set the polar axis size ratio between major and minor ticks.",
-      "range": [
+          "widget": "textfield",
+          "name": "Minimum Radius",
+          "doc": "Set the minimum radius, Maximum radius is automatically computed.",
+          "range": [
+            {
+              "max": 100.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 1
+        },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Polar Axis Major Tick Thickness",
-      "doc": "Set the thickness of polar axis major ticks.",
-      "range": [
+          "widget": "textfield",
+          "name": "Minimum Angle",
+          "doc": "Set the minimum angle.",
+          "range": [
+            {
+              "max": 180.0,
+              "min": -180.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 1
+        },
         {
-          "max": 100.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Polar Axis Tick Ratio Thickness",
-      "doc": "Set the thickness ratio between major and minor ticks of polar axis.\n        ",
-      "range": [
+          "widget": "textfield",
+          "name": "Maximum Angle",
+          "doc": "Set the maximum angle.",
+          "range": [
+            {
+              "max": 180.0,
+              "min": -180.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 1
+        },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Last Radial Axis Major Tick Size",
-      "doc": "Set the last radial axis major tick size,\n        If value is 0 (the default), tick size is automatically calculated.\n        ",
-      "range": [
+          "widget": "checkbox",
+          "name": "Radial Axes Origin To Polar Axis",
+          "doc": "If On, the radial axes are drawn from the angle of the polar Axis\n        (i.e. MinimumAngle) and continue counterclockwise with the step DeltaAngleRadialAxes.\n        if Off, the start angle is 0.0.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 1,
+          "size": 1
+        },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Last Radial Axis Tick Ratio Size",
-      "doc": "Set the last radial axis size ratio between major and minor ticks.",
-      "range": [
+          "widget": "textfield",
+          "name": "Ratio",
+          "doc": "Set the polar ellipse ratio.",
+          "range": [
+            {
+              "max": 100.0,
+              "min": 0.001
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 1
+        },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Last Radial Axis Major Tick Thickness",
-      "doc": "Set the thickness of last radial axis major ticks.",
-      "range": [
+          "widget": "textfield",
+          "name": "Polar Axis Color",
+          "doc": "Set the Polar Axis color.",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
+        },
         {
-          "max": 100.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Last Radial Axis Tick Ratio Thickness",
-      "doc": "Set the thickness ratio between major and minor ticks of last radial axis.",
-      "range": [
+          "widget": "textfield",
+          "name": "Polar Arcs Color",
+          "doc": "Set the Polar Arcs color.",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
+        },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Arc Major Tick Size",
-      "doc": "Set the arc major tick size,\n        If value is 0 (the default), tick size is automatically calculated.\n        ",
-      "range": [
+          "widget": "textfield",
+          "name": "Last Radial Axis Color",
+          "doc": "Set the Last Radial Axis color.",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
+        },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Arc Tick Ratio Size",
-      "doc": "Set the arc size ratio between major and minor ticks.",
-      "range": [
+          "widget": "textfield",
+          "name": "Secondary Polar Arcs Color",
+          "doc": "Set the Secondary Polar Arcs color.",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
+        },
         {
-          "max": 1.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Arc Major Tick Thickness",
-      "doc": "Set the thickness of arc major ticks.",
-      "range": [
+          "widget": "textfield",
+          "name": "Secondary Radial Axes Color",
+          "doc": "Set the Secondary Radial Axes color.",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            },
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 0,
+          "size": 3
+        },
         {
-          "max": 100.0,
-          "min": 0.0
-        }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "textfield",
-      "name": "Arc Tick Ratio Thickness",
-      "doc": "Set the thickness ratio between major and minor ticks of arc.",
-      "range": [
+          "widget": "checkbox",
+          "name": "Polar Axis Title Visibility",
+          "doc": "Set the visibility of polar axis title.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
         {
-          "max": 1.0,
-          "min": 0.0
+          "widget": "textfield",
+          "name": "Polar Axis Title",
+          "doc": "Set the polar axis title.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "str",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "list-1",
+          "name": "Polar Axis Title Location",
+          "doc": "Set the location of polar axis title.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "values": {
+            "Extern": 1,
+            "Bottom": 0
+          },
+          "type": "int",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Polar Label Visibility",
+          "doc": "Set the visibility of polar axis label.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Polar Label Format",
+          "doc": "Set the polar axis label format.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "str",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "list-1",
+          "name": "Polar Label Exponent Location",
+          "doc": "Set the location of exponent.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "values": {
+            "Extern": 1,
+            "Labels": 2,
+            "Bottom": 0
+          },
+          "type": "int",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Radial Label Visibility",
+          "doc": "Set radial label visibility.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Radial Label Format",
+          "doc": "Set the polar radial label format.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "str",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "list-1",
+          "name": "Radial Label Location",
+          "doc": "Set the location of radial labels.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "values": {
+            "Extern": 1,
+            "Bottom": 0
+          },
+          "type": "int",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Radial Units Visibility",
+          "doc": "Show radial units in labels (degrees).",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Screen Size",
+          "doc": "Set the screen size to use, which impact label and title\n        relative location to the axes.",
+          "range": [
+            {
+              "max": 100.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Enable Distance LOD",
+          "doc": "Set the use of LOD based on distance.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Distance LODThreshold",
+          "doc": "Set the LOD distance threshold to use.",
+          "range": [
+            {
+              "max": 100.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Enable View Angle LOD",
+          "doc": "Set the use of LOD based on the View Angle.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "View Angle LODThreshold",
+          "doc": "Set the LOD View Angle threshold to use.",
+          "range": [
+            {
+              "max": 360.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Smallest Visible Polar Angle",
+          "doc": "Set the smallest radial angle distinguishable from polar axis.",
+          "range": [
+            {
+              "max": 2.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Polar Ticks Visibility",
+          "doc": "Set all ticks visibility.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Arc Ticks Origin To Polar Axis",
+          "doc": "If On, the ticks are drawn from the angle of the polar Axis\n        (MinimumAngle) and continue counterclockwise with the step Delta Angle Major/Minor.\n        If Off, the start angle is 0.0",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "list-1",
+          "name": "Tick Location",
+          "doc": "Set the location of ticks.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "values": {
+            "Both": 2,
+            "Inside": 0,
+            "Outside": 1
+          },
+          "type": "int",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Axis Tick Visibility",
+          "doc": "Set polar axis and last radial axis tick visibility.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Axis Minor Tick Visibility",
+          "doc": "Set polar axis and last radial axis minor tick visibility.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Arc Tick Visibility",
+          "doc": "Set polar arc tick visibility.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Arc Minor Tick Visibility",
+          "doc": "Set polar arc minor tick visibility.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Delta Angle Major",
+          "doc": "Set the delta between major ticks on last arc.",
+          "range": [
+            {
+              "max": 359.0,
+              "min": 1.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Delta Angle Minor",
+          "doc": "Set the delta between minor and major ticks on last arc.",
+          "range": [
+            {
+              "max": 359.0,
+              "min": 1.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Polar Axis Major Tick Size",
+          "doc": "Set the polar axis major tick size,\n        If value is 0 (the default), tick size is automatically calculated.\n        ",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Polar Axis Tick Ratio Size",
+          "doc": "Set the polar axis size ratio between major and minor ticks.",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Polar Axis Major Tick Thickness",
+          "doc": "Set the thickness of polar axis major ticks.",
+          "range": [
+            {
+              "max": 100.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Polar Axis Tick Ratio Thickness",
+          "doc": "Set the thickness ratio between major and minor ticks of polar axis.\n        ",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Last Radial Axis Major Tick Size",
+          "doc": "Set the last radial axis major tick size,\n        If value is 0 (the default), tick size is automatically calculated.\n        ",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Last Radial Axis Tick Ratio Size",
+          "doc": "Set the last radial axis size ratio between major and minor ticks.",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Last Radial Axis Major Tick Thickness",
+          "doc": "Set the thickness of last radial axis major ticks.",
+          "range": [
+            {
+              "max": 100.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Last Radial Axis Tick Ratio Thickness",
+          "doc": "Set the thickness ratio between major and minor ticks of last radial axis.",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Arc Major Tick Size",
+          "doc": "Set the arc major tick size,\n        If value is 0 (the default), tick size is automatically calculated.\n        ",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Arc Tick Ratio Size",
+          "doc": "Set the arc size ratio between major and minor ticks.",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Arc Major Tick Thickness",
+          "doc": "Set the thickness of arc major ticks.",
+          "range": [
+            {
+              "max": 100.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "textfield",
+          "name": "Arc Tick Ratio Thickness",
+          "doc": "Set the thickness ratio between major and minor ticks of arc.",
+          "range": [
+            {
+              "max": 1.0,
+              "min": 0.0
+            }
+          ],
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "float",
+          "advanced": 1,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Use 2D Mode",
+          "doc": "Set the use of 2D Mode for all axes.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
+        },
+        {
+          "widget": "checkbox",
+          "name": "Use Log Axis",
+          "doc": "Set the use of Log axis.",
+          "depends": "596:PolarAxes:PolarAxesRepresentation:1",
+          "type": "int",
+          "advanced": 0,
+          "size": 1
         }
-      ],
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "float",
-      "advanced": 1,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Use 2D Mode",
-      "doc": "Set the use of 2D Mode for all axes.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
-    },
-    {
-      "widget": "checkbox",
-      "name": "Use Log Axis",
-      "doc": "Set the use of Log axis.",
-      "depends": "596:PolarAxes:PolarAxesRepresentation:1",
-      "type": "int",
-      "advanced": 0,
-      "size": 1
+      ]
     },
     {
       "widget": "textfield",
@@ -2981,380 +2987,385 @@
       ]
     },
     {
-      "name": "PolarAxes",
-      "value": "PolarAxesRepresentation",
-      "id": "596"
-    },
-    {
-      "name": "Visibility",
-      "value": 0,
-      "id": "412"
-    },
-    {
-      "name": "Position",
-      "value": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "id": "412"
-    },
-    {
-      "name": "Scale",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "412"
-    },
-    {
-      "name": "Orientation",
-      "value": [
-        0.0,
-        0.0,
-        0.0
-      ],
-      "id": "412"
-    },
-    {
-      "name": "EnableCustomBounds",
-      "value": [
-        0,
-        0,
-        0
-      ],
-      "id": "412"
-    },
-    {
-      "name": "CustomBounds",
-      "value": [
-        0.0,
-        1.0,
-        0.0,
-        1.0,
-        0.0,
-        1.0
-      ],
-      "id": "412"
-    },
-    {
-      "name": "EnableCustomRange",
-      "value": 0,
-      "id": "412"
-    },
-    {
-      "name": "CustomRange",
-      "value": [
-        0.0,
-        1.0
-      ],
-      "id": "412"
-    },
-    {
-      "name": "PolarAxisVisibility",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "RadialAxesVisibility",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "DrawRadialGridlines",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "PolarArcsVisibility",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "DrawPolarArcsGridlines",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "NumberOfRadialAxes",
-      "value": 0,
-      "id": "412"
-    },
-    {
-      "name": "AutoSubdividePolarAxis",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "NumberOfPolarAxis",
-      "value": 0,
-      "id": "412"
-    },
-    {
-      "name": "MinimumRadius",
-      "value": 0.0,
-      "id": "412"
-    },
-    {
-      "name": "MinimumAngle",
-      "value": 0.0,
-      "id": "412"
-    },
-    {
-      "name": "MaximumAngle",
-      "value": 90.0,
-      "id": "412"
-    },
-    {
-      "name": "RadialAxesOriginToPolarAxis",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "Ratio",
-      "value": 1.0,
-      "id": "412"
-    },
-    {
-      "name": "PolarAxisColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "412"
-    },
-    {
-      "name": "PolarArcsColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "412"
-    },
-    {
-      "name": "LastRadialAxisColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "412"
-    },
-    {
-      "name": "SecondaryPolarArcsColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "412"
-    },
-    {
-      "name": "SecondaryRadialAxesColor",
-      "value": [
-        1.0,
-        1.0,
-        1.0
-      ],
-      "id": "412"
-    },
-    {
-      "name": "PolarAxisTitleVisibility",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "PolarAxisTitle",
-      "value": "Radial Distance",
-      "id": "412"
-    },
-    {
-      "name": "PolarAxisTitleLocation",
-      "value": "Bottom",
-      "id": "412"
-    },
-    {
-      "name": "PolarLabelVisibility",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "PolarLabelFormat",
-      "value": "%-#6.3g",
-      "id": "412"
-    },
-    {
-      "name": "PolarLabelExponentLocation",
-      "value": "Labels",
-      "id": "412"
-    },
-    {
-      "name": "RadialLabelVisibility",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "RadialLabelFormat",
-      "value": "%-#3.1f",
-      "id": "412"
-    },
-    {
-      "name": "RadialLabelLocation",
-      "value": "Bottom",
-      "id": "412"
-    },
-    {
-      "name": "RadialUnitsVisibility",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "ScreenSize",
-      "value": 10.0,
-      "id": "412"
-    },
-    {
-      "name": "EnableDistanceLOD",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "DistanceLODThreshold",
-      "value": 0.7,
-      "id": "412"
-    },
-    {
-      "name": "EnableViewAngleLOD",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "ViewAngleLODThreshold",
-      "value": 0.7,
-      "id": "412"
-    },
-    {
-      "name": "SmallestVisiblePolarAngle",
-      "value": 0.5,
-      "id": "412"
-    },
-    {
-      "name": "PolarTicksVisibility",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "ArcTicksOriginToPolarAxis",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "TickLocation",
-      "value": "Both",
-      "id": "412"
-    },
-    {
-      "name": "AxisTickVisibility",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "AxisMinorTickVisibility",
-      "value": 0,
-      "id": "412"
-    },
-    {
-      "name": "ArcTickVisibility",
-      "value": 1,
-      "id": "412"
-    },
-    {
-      "name": "ArcMinorTickVisibility",
-      "value": 0,
-      "id": "412"
-    },
-    {
-      "name": "DeltaAngleMajor",
-      "value": 10.0,
-      "id": "412"
-    },
-    {
-      "name": "DeltaAngleMinor",
-      "value": 5.0,
-      "id": "412"
-    },
-    {
-      "name": "PolarAxisMajorTickSize",
-      "value": 0.0,
-      "id": "412"
-    },
-    {
-      "name": "PolarAxisTickRatioSize",
-      "value": 0.3,
-      "id": "412"
-    },
-    {
-      "name": "PolarAxisMajorTickThickness",
-      "value": 1.0,
-      "id": "412"
-    },
-    {
-      "name": "PolarAxisTickRatioThickness",
-      "value": 0.5,
-      "id": "412"
-    },
-    {
-      "name": "LastRadialAxisMajorTickSize",
-      "value": 0.0,
-      "id": "412"
-    },
-    {
-      "name": "LastRadialAxisTickRatioSize",
-      "value": 0.3,
-      "id": "412"
-    },
-    {
-      "name": "LastRadialAxisMajorTickThickness",
-      "value": 1.0,
-      "id": "412"
-    },
-    {
-      "name": "LastRadialAxisTickRatioThickness",
-      "value": 0.5,
-      "id": "412"
-    },
-    {
-      "name": "ArcMajorTickSize",
-      "value": 0.0,
-      "id": "412"
-    },
-    {
-      "name": "ArcTickRatioSize",
-      "value": 0.3,
-      "id": "412"
-    },
-    {
-      "name": "ArcMajorTickThickness",
-      "value": 1.0,
-      "id": "412"
-    },
-    {
-      "name": "ArcTickRatioThickness",
-      "value": 0.5,
-      "id": "412"
-    },
-    {
-      "name": "Use2DMode",
-      "value": 0,
-      "id": "412"
-    },
-    {
-      "name": "UseLogAxis",
-      "value": 0,
-      "id": "412"
+      "collapsed": true,
+      "children": [
+        {
+          "name": "PolarAxes",
+          "value": "PolarAxesRepresentation",
+          "id": "596"
+        },
+        {
+          "name": "Visibility",
+          "value": 0,
+          "id": "412"
+        },
+        {
+          "name": "Position",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "id": "412"
+        },
+        {
+          "name": "Scale",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "412"
+        },
+        {
+          "name": "Orientation",
+          "value": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "id": "412"
+        },
+        {
+          "name": "EnableCustomBounds",
+          "value": [
+            0,
+            0,
+            0
+          ],
+          "id": "412"
+        },
+        {
+          "name": "CustomBounds",
+          "value": [
+            0.0,
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            1.0
+          ],
+          "id": "412"
+        },
+        {
+          "name": "EnableCustomRange",
+          "value": 0,
+          "id": "412"
+        },
+        {
+          "name": "CustomRange",
+          "value": [
+            0.0,
+            1.0
+          ],
+          "id": "412"
+        },
+        {
+          "name": "PolarAxisVisibility",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "RadialAxesVisibility",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "DrawRadialGridlines",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "PolarArcsVisibility",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "DrawPolarArcsGridlines",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "NumberOfRadialAxes",
+          "value": 0,
+          "id": "412"
+        },
+        {
+          "name": "AutoSubdividePolarAxis",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "NumberOfPolarAxis",
+          "value": 0,
+          "id": "412"
+        },
+        {
+          "name": "MinimumRadius",
+          "value": 0.0,
+          "id": "412"
+        },
+        {
+          "name": "MinimumAngle",
+          "value": 0.0,
+          "id": "412"
+        },
+        {
+          "name": "MaximumAngle",
+          "value": 90.0,
+          "id": "412"
+        },
+        {
+          "name": "RadialAxesOriginToPolarAxis",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "Ratio",
+          "value": 1.0,
+          "id": "412"
+        },
+        {
+          "name": "PolarAxisColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "412"
+        },
+        {
+          "name": "PolarArcsColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "412"
+        },
+        {
+          "name": "LastRadialAxisColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "412"
+        },
+        {
+          "name": "SecondaryPolarArcsColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "412"
+        },
+        {
+          "name": "SecondaryRadialAxesColor",
+          "value": [
+            1.0,
+            1.0,
+            1.0
+          ],
+          "id": "412"
+        },
+        {
+          "name": "PolarAxisTitleVisibility",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "PolarAxisTitle",
+          "value": "Radial Distance",
+          "id": "412"
+        },
+        {
+          "name": "PolarAxisTitleLocation",
+          "value": "Bottom",
+          "id": "412"
+        },
+        {
+          "name": "PolarLabelVisibility",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "PolarLabelFormat",
+          "value": "%-#6.3g",
+          "id": "412"
+        },
+        {
+          "name": "PolarLabelExponentLocation",
+          "value": "Labels",
+          "id": "412"
+        },
+        {
+          "name": "RadialLabelVisibility",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "RadialLabelFormat",
+          "value": "%-#3.1f",
+          "id": "412"
+        },
+        {
+          "name": "RadialLabelLocation",
+          "value": "Bottom",
+          "id": "412"
+        },
+        {
+          "name": "RadialUnitsVisibility",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "ScreenSize",
+          "value": 10.0,
+          "id": "412"
+        },
+        {
+          "name": "EnableDistanceLOD",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "DistanceLODThreshold",
+          "value": 0.7,
+          "id": "412"
+        },
+        {
+          "name": "EnableViewAngleLOD",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "ViewAngleLODThreshold",
+          "value": 0.7,
+          "id": "412"
+        },
+        {
+          "name": "SmallestVisiblePolarAngle",
+          "value": 0.5,
+          "id": "412"
+        },
+        {
+          "name": "PolarTicksVisibility",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "ArcTicksOriginToPolarAxis",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "TickLocation",
+          "value": "Both",
+          "id": "412"
+        },
+        {
+          "name": "AxisTickVisibility",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "AxisMinorTickVisibility",
+          "value": 0,
+          "id": "412"
+        },
+        {
+          "name": "ArcTickVisibility",
+          "value": 1,
+          "id": "412"
+        },
+        {
+          "name": "ArcMinorTickVisibility",
+          "value": 0,
+          "id": "412"
+        },
+        {
+          "name": "DeltaAngleMajor",
+          "value": 10.0,
+          "id": "412"
+        },
+        {
+          "name": "DeltaAngleMinor",
+          "value": 5.0,
+          "id": "412"
+        },
+        {
+          "name": "PolarAxisMajorTickSize",
+          "value": 0.0,
+          "id": "412"
+        },
+        {
+          "name": "PolarAxisTickRatioSize",
+          "value": 0.3,
+          "id": "412"
+        },
+        {
+          "name": "PolarAxisMajorTickThickness",
+          "value": 1.0,
+          "id": "412"
+        },
+        {
+          "name": "PolarAxisTickRatioThickness",
+          "value": 0.5,
+          "id": "412"
+        },
+        {
+          "name": "LastRadialAxisMajorTickSize",
+          "value": 0.0,
+          "id": "412"
+        },
+        {
+          "name": "LastRadialAxisTickRatioSize",
+          "value": 0.3,
+          "id": "412"
+        },
+        {
+          "name": "LastRadialAxisMajorTickThickness",
+          "value": 1.0,
+          "id": "412"
+        },
+        {
+          "name": "LastRadialAxisTickRatioThickness",
+          "value": 0.5,
+          "id": "412"
+        },
+        {
+          "name": "ArcMajorTickSize",
+          "value": 0.0,
+          "id": "412"
+        },
+        {
+          "name": "ArcTickRatioSize",
+          "value": 0.3,
+          "id": "412"
+        },
+        {
+          "name": "ArcMajorTickThickness",
+          "value": 1.0,
+          "id": "412"
+        },
+        {
+          "name": "ArcTickRatioThickness",
+          "value": 0.5,
+          "id": "412"
+        },
+        {
+          "name": "Use2DMode",
+          "value": 0,
+          "id": "412"
+        },
+        {
+          "name": "UseLogAxis",
+          "value": 0,
+          "id": "412"
+        }
+      ]
     },
     {
       "name": "ScalarOpacityFunction",
