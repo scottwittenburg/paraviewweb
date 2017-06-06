@@ -28,14 +28,19 @@
   font-weight: 500;
 }
 
+.icon {
+  /*margin-left: 10px;*/
+  width: 20px;
+}
+
 .expandedIcon {
-  margin-left: 10px;
+  composes: icon;
   composes: fa             from 'font-awesome/css/font-awesome.css';
   composes: fa-caret-down  from 'font-awesome/css/font-awesome.css';
 }
 
-.collapedIcon {
-  margin-left: 10px;
+.collapsedIcon {
+  composes: icon;
   composes: fa             from 'font-awesome/css/font-awesome.css';
   composes: fa-caret-right  from 'font-awesome/css/font-awesome.css';
 }

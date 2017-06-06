@@ -35,8 +35,8 @@ export default React.createClass({
     return (
       <div className={style.container}>
         <div className={style.toolbar} onClick={this.toggleCollapsedMode}>
+          <i className={this.state.collapsed ? style.collapsedIcon : style.expandedIcon} />
           <span className={style.title}>{this.props.prop.ui.groupName}</span>
-          <i className={this.state.collapsed ? style.collapedIcon : style.expandedIcon} />
         </div>
         <div className={this.state.collapsed ? style.hidden : style.content}>
           {this.props.prop.children.map(p => factory(p, this.props.viewData, this.props.onChange))}

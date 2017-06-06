@@ -6,6 +6,16 @@ import style from 'PVWStyle/ReactWidgets/ProxyPropertyGroup.mcss';
 import factory          from '../../Properties/PropertyFactory';
 import { proxyToProps } from '../../../Common/Misc/ConvertProxyProperty';
 
+function extractProperties(nestedPropsInput, flatPropsOutput) {
+  nestedPropsInput.forEach((p) => {
+    if (p.ui.propType === 'group') {
+      extractProperties(p.children, flatPropsOutput);
+    } else {
+      flatPropsOutput[p.data.id] = p.data.value;
+    }
+  });
+}
+
 export default React.createClass({
 
   displayName: 'ProxyPropertyGroup',
@@ -68,15 +78,7 @@ export default React.createClass({
     const ctx = { advanced: this.props.advanced, filter: this.props.filter, properties };
     const changeSetCount = Object.keys(this.state.changeSet).length;
 
-    function extractProperties(p) {
-      if (p.ui.propType === 'group') {
-        p.children.forEach(extractProperties);
-      } else {
-        properties[p.data.id] = p.data.value;
-      }
-    }
-
-    this.state.properties.forEach(extractProperties);
+    extractProperties(this.state.properties, properties);
 
     return (
       <div className={style.container}>
