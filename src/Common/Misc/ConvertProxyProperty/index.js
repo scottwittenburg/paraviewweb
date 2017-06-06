@@ -83,6 +83,10 @@ export function proxyPropToProp(property, ui) {
         propType: 'group',
         groupName: ui.name,
       },
+      data: {
+        id: `${ui.name}:collapsed`,
+        value: [property.collapsed],
+      },
       children: propertyChildren.map((prop, idx) => proxyPropToProp(prop, uiChildren[idx])),
     };
   }

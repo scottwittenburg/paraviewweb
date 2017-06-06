@@ -40,11 +40,14 @@ export default React.createClass({
 
   updateChangeSet(change) {
     const changeSet = Object.assign({}, this.state.changeSet, change);
+    console.log('Received a change to make: ', change);
+    console.log('Accumulated changes have thus been updated: ', changeSet);
     this.setState({ changeSet });
   },
 
   applyChanges() {
     if (this.props.onApply) {
+      console.log('Applying accumulated changes: ', this.state.changeSet);
       this.props.onApply(this.state.changeSet);
     }
     // Reset changeSet

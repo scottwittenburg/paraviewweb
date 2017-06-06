@@ -2,45 +2,34 @@ import React     from 'react';
 import style     from 'PVWStyle/ReactProperties/PropertyGroup.mcss';
 import factory   from '../../Properties/PropertyFactory';
 
+function notifyCollapseChange(props) {
+  if (props.onChange) {
+    props.onChange({
+      id: props.prop.data.id,
+      value: !props.prop.data.value,
+    });
+  }
+}
 
-export default React.createClass({
+const PropertyGroup = (props) => {
+  const collapsed = props.prop.data.value;
 
-  displayName: 'PropertyGroup',
+  return (
+    <div className={style.container}>
+      <div className={style.toolbar} onClick={() => notifyCollapseChange(props)}>
+        <i className={collapsed ? style.collapsedIcon : style.expandedIcon} />
+        <span className={style.title}>{props.prop.ui.groupName}</span>
+      </div>
+      <div className={collapsed ? style.hidden : style.content}>
+        {props.prop.children.map(p => factory(p, props.viewData, props.onChange))}
+      </div>
+    </div>);
+};
 
-  propTypes: {
-    prop: React.PropTypes.object,
-    viewData: React.PropTypes.object,
-    onChange: React.PropTypes.func,
-    collapsed: React.PropTypes.bool,
-  },
+PropertyGroup.propTypes = {
+  prop: React.PropTypes.object,
+  viewData: React.PropTypes.object,
+  onChange: React.PropTypes.func,
+};
 
-  getDefaultProps() {
-    return {
-      collapsed: true,
-    };
-  },
-
-  getInitialState() {
-    return {
-      collapsed: this.props.collapsed,
-    };
-  },
-
-  toggleCollapsedMode() {
-    const collapsed = !this.state.collapsed;
-    this.setState({ collapsed });
-  },
-
-  render() {
-    return (
-      <div className={style.container}>
-        <div className={style.toolbar} onClick={this.toggleCollapsedMode}>
-          <i className={this.state.collapsed ? style.collapsedIcon : style.expandedIcon} />
-          <span className={style.title}>{this.props.prop.ui.groupName}</span>
-        </div>
-        <div className={this.state.collapsed ? style.hidden : style.content}>
-          {this.props.prop.children.map(p => factory(p, this.props.viewData, this.props.onChange))}
-        </div>
-      </div>);
-  },
-});
+export default PropertyGroup;
