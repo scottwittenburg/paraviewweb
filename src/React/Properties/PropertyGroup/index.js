@@ -8,6 +8,7 @@ export default React.createClass({
   displayName: 'PropertyGroup',
 
   propTypes: {
+    show: React.PropTypes.func,
     prop: React.PropTypes.object,
     viewData: React.PropTypes.object,
     onChange: React.PropTypes.func,
@@ -33,10 +34,10 @@ export default React.createClass({
 
   render() {
     return (
-      <div className={style.container}>
+      <div className={this.props.show(this.props.viewData) ? style.container : style.hidden}>
         <div className={style.toolbar} onClick={this.toggleCollapsedMode}>
           <i className={this.state.collapsed ? style.collapsedIcon : style.expandedIcon} />
-          <span className={style.title}>{this.props.prop.ui.groupName}</span>
+          <span className={style.title}>{this.props.prop.ui.label}</span>
         </div>
         <div className={this.state.collapsed ? style.hidden : style.content}>
           {this.props.prop.children.map(p => factory(p, this.props.viewData, this.props.onChange))}

@@ -16,7 +16,7 @@ const factoryMapping = {
   Enum: (prop, viewData, onChange) => <EnumProperty key={prop.data.id} data={prop.data} ui={prop.ui} viewData={viewData} show={prop.show} onChange={onChange || prop.onChange} />,
   Checkbox: (prop, viewData, onChange) => <CheckboxProperty key={prop.data.id} data={prop.data} ui={prop.ui} viewData={viewData} show={prop.show} onChange={onChange || prop.onChange} />,
   Map: (prop, viewData, onChange) => <MapProperty key={prop.data.id} data={prop.data} ui={prop.ui} viewData={viewData} show={prop.show} onChange={onChange || prop.onChange} />,
-  Group: (prop, viewData, onChange) => <PropertyGroup key={prop.ui.groupName} prop={prop} viewData={viewData} onChange={onChange} />,
+  Group: (prop, viewData, onChange) => <PropertyGroup key={prop.data.id} prop={prop} viewData={viewData} show={prop.show} onChange={onChange} />,
 };
 
 /* eslint-enable react/display-name */
