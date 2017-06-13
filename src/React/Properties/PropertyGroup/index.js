@@ -7,6 +7,7 @@ const PropertyGroup = props => (
     <div className={style.toolbar} >
       <span className={style.title}>{props.prop.ui.label}</span>
     </div>
+    <div className={style.separator} />
     <div className={style.content}>
       {props.prop.children.map(p => factory(p, props.viewData, props.onChange))}
     </div>
