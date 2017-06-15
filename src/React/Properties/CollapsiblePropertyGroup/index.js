@@ -13,6 +13,7 @@ export default React.createClass({
     viewData: React.PropTypes.object,
     onChange: React.PropTypes.func,
     collapsed: React.PropTypes.bool,
+    onGroupCollapseChange: React.PropTypes.func,
   },
 
   getDefaultProps() {
@@ -21,21 +22,10 @@ export default React.createClass({
     };
   },
 
-  getInitialState() {
-    return {
-      collapsed: this.props.collapsed,
-    };
-  },
-
-  toggleCollapsedMode() {
-    const collapsed = !this.state.collapsed;
-    this.setState({ collapsed });
-  },
-
   render() {
     return (
       <div className={this.props.show(this.props.viewData) ? style.container : style.hidden}>
-        <div className={style.toolbar} onClick={this.toggleCollapsedMode}>
+        <div className={style.toolbar} onClick={() => this.props.onGroupCollapseChange(!this.props.collapsed)}>
           <i className={this.state.collapsed ? style.collapsedIcon : style.expandedIcon} />
           <span className={style.title}>{this.props.prop.ui.label}</span>
         </div>

@@ -26,6 +26,7 @@ export default React.createClass({
     filter: React.PropTypes.string,
     onChange: React.PropTypes.func,
     onCollapseChange: React.PropTypes.func,
+    onGroupCollapseChange: React.PropTypes.func,
     proxy: React.PropTypes.object,
   },
 
@@ -91,7 +92,7 @@ export default React.createClass({
           </span>
         </div>
         <div className={this.state.collapsed ? style.hidden : style.content}>
-          {this.state.properties.map(p => factory(p, ctx, this.valueChange))}
+          {this.state.properties.map(p => factory(p, ctx, this.valueChange, this.props.onGroupCollapseChange))}
         </div>
       </div>);
   },
