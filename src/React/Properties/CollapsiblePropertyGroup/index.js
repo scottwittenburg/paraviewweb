@@ -8,7 +8,7 @@ const CollapsiblePropertyGroup = (props) => {
 
   return (
     <div className={props.show(props.viewData) ? style.container : style.hidden}>
-      <div className={style.toolbar} onClick={() => props.onGroupCollapseChange(id, !isCollapsed)}>
+      <div className={style.toolbar} onClick={() => props.onChange({ groupCollapse: { id, collapsed: !isCollapsed } })}>
         <i className={isCollapsed ? style.collapsedIcon : style.expandedIcon} />
         <span className={style.title}>{props.prop.ui.label}</span>
       </div>

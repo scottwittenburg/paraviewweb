@@ -12,7 +12,6 @@ export default React.createClass({
     onApply: React.PropTypes.func,
     sections: React.PropTypes.array.isRequired,
     onCollapseChange: React.PropTypes.func,
-    onGroupCollapseChange: React.PropTypes.func,
   },
 
   getDefaultProps() {
@@ -83,7 +82,6 @@ export default React.createClass({
               advanced={this.state.advanced}
               onChange={this.updateChangeSet}
               onCollapseChange={this.props.onCollapseChange}
-              onGroupCollapseChange={this.props.onGroupCollapseChange}
             />
           )}
         </div>

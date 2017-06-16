@@ -18,7 +18,7 @@ const factoryMapping = {
   Checkbox: (prop, viewData, onChange) => <CheckboxProperty key={prop.data.id} data={prop.data} ui={prop.ui} viewData={viewData} show={prop.show} onChange={onChange || prop.onChange} />,
   Map: (prop, viewData, onChange) => <MapProperty key={prop.data.id} data={prop.data} ui={prop.ui} viewData={viewData} show={prop.show} onChange={onChange || prop.onChange} />,
   Propertygroup: (prop, viewData, onChange) => <PropertyGroup key={prop.data.id} prop={prop} viewData={viewData} show={prop.show} onChange={onChange} />,
-  Proxyeditorpropertywidget: (prop, viewData, onChange, onGroupCollapseChange) => <CollapsiblePropertyGroup key={prop.data.id} prop={prop} viewData={viewData} show={prop.show} onChange={onChange} onGroupCollapseChange={onGroupCollapseChange} />,
+  Proxyeditorpropertywidget: (prop, viewData, onChange) => <CollapsiblePropertyGroup key={prop.data.id} prop={prop} viewData={viewData} show={prop.show} onChange={onChange} />,
 };
 
 /* eslint-enable react/display-name */
@@ -30,10 +30,10 @@ function capitalize(str) {
   return str[0].toUpperCase() + str.substr(1).toLowerCase();
 }
 
-export default function (prop, vd, onChange, onGroupCollapseChange) {
+export default function (prop, vd, onChange) {
   var fn = factoryMapping[capitalize(prop.ui.propType)];
   if (fn) {
-    return fn(prop, vd, onChange, onGroupCollapseChange);
+    return fn(prop, vd, onChange);
   }
   return null;
 }
