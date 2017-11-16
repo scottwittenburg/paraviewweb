@@ -20,7 +20,7 @@ const placeholderContainer = (
     </div>
   </div>);
 
-export default function annotationEditorWidget(props) {
+export default function render(props) {
   if (!props.annotation) {
     return placeholderContainer;
   }
@@ -85,16 +85,18 @@ export default function annotationEditorWidget(props) {
     </div>);
 }
 
-annotationEditorWidget.propTypes = {
+render.propTypes = {
   annotation: React.PropTypes.object,
   scores: React.PropTypes.array,
   ranges: React.PropTypes.object,
   onChange: React.PropTypes.func,
   getLegend: React.PropTypes.func,
   rationaleOpen: React.PropTypes.bool,
+  showUncertainty: React.PropTypes.bool,
 };
 
-annotationEditorWidget.defaultProps = {
+render.defaultProps = {
   onChange(annotation, isEditDone) {},
   rationaleOpen: false,
+  showUncertainty: true,
 };

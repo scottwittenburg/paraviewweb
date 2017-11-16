@@ -1,4 +1,5 @@
 import AnnotationBuilder from './AnnotationBuilder';
+import BusyMonitor from './BusyMonitor';
 import CanvasOffscreenBuffer from './CanvasOffscreenBuffer';
 import Convert from './Convert';
 import ConvertProxyProperty from './ConvertProxyProperty';
@@ -17,6 +18,7 @@ import WebGl from './WebGl';
 
 export default {
   AnnotationBuilder,
+  BusyMonitor,
   CanvasOffscreenBuffer,
   Convert,
   ConvertProxyProperty,

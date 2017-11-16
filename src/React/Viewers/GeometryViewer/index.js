@@ -1,5 +1,7 @@
 import React                from 'react';
 import AbstractViewerMenu   from '../AbstractViewerMenu';
+import GeometryRenderer     from '../../Renderers/GeometryRenderer';
+
 
 export default React.createClass({
 
@@ -10,6 +12,7 @@ export default React.createClass({
     geometryBuilder: React.PropTypes.object.isRequired,
     menuAddOn: React.PropTypes.array,
     queryDataModel: React.PropTypes.object.isRequired,
+    userData: React.PropTypes.object,
   },
 
   getDefaultProps() {
@@ -33,6 +36,7 @@ export default React.createClass({
         queryDataModel={queryDataModel}
         geometryBuilder={geometryBuilder}
         renderer="GeometryRenderer"
+        rendererClass={GeometryRenderer}
         config={this.props.config || {}}
       >
         {controlWidgets}

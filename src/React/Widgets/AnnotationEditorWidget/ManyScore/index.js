@@ -8,7 +8,7 @@ import ScoreSelector from '../ScoreSelector';
 import BGSelector from '../BackgroundScore';
 import SelectionEditorWidget from '../../SelectionEditorWidget';
 
-export default function manyScoreAnnotationEditorWidget(props) {
+export default function render(props) {
   return (
     <div className={style.verticalContainer}>
       <section className={style.lineContainer}>
@@ -29,6 +29,7 @@ export default function manyScoreAnnotationEditorWidget(props) {
           ranges={props.ranges}
           getLegend={props.getLegend}
           onChange={props.onSelectionChange}
+          showUncertainty={props.showUncertainty}
         >
           {props.annotation.score.map((score, idx, array) =>
             <BGSelector
@@ -86,18 +87,20 @@ export default function manyScoreAnnotationEditorWidget(props) {
     </div>);
 }
 
-manyScoreAnnotationEditorWidget.propTypes = {
+render.propTypes = {
   annotation: React.PropTypes.object,
   scores: React.PropTypes.array,
   ranges: React.PropTypes.object,
   getLegend: React.PropTypes.func,
   rationaleOpen: React.PropTypes.bool,
+  showUncertainty: React.PropTypes.bool,
 
   onSelectionChange: React.PropTypes.func,
   onAnnotationChange: React.PropTypes.func,
   onScoreChange: React.PropTypes.func,
 };
 
-manyScoreAnnotationEditorWidget.defaultProps = {
+render.defaultProps = {
   rationaleOpen: false,
+  showUncertainty: true,
 };

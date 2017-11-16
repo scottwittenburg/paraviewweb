@@ -1,50 +1,35 @@
-import React             from 'react';
+import React from 'react';
+import style from 'PVWStyle/ReactViewers/AbstractViewerMenu.mcss';
 
-import style             from 'PVWStyle/ReactViewers/AbstractViewerMenu.mcss';
+export default class AbstractViewerMenu extends React.Component {
+  constructor(props) {
+    super(props);
 
-import GeometryRenderer  from '../../Renderers/GeometryRenderer';
-import ImageRenderer     from '../../Renderers/ImageRenderer';
-import MultiViewRenderer from '../../Renderers/MultiLayoutRenderer';
-import PlotlyRenderer    from '../../Renderers/PlotlyRenderer';
-
-export default React.createClass({
-
-  displayName: 'AbstractViewerMenu',
-
-  propTypes: {
-    children: React.PropTypes.array,
-    config: React.PropTypes.object,
-    geometryBuilder: React.PropTypes.object,
-    imageBuilder: React.PropTypes.object,
-    chartBuilder: React.PropTypes.object,
-    layout: React.PropTypes.string,
-    magicLensController: React.PropTypes.object,
-    mouseListener: React.PropTypes.object,
-    queryDataModel: React.PropTypes.object,
-    renderer: React.PropTypes.string,
-    renderers: React.PropTypes.object,
-  },
-
-  getDefaultProps() {
-    return {
-      config: {},
-      renderer: 'ImageRenderer',
-    };
-  },
-
-  getInitialState() {
-    return {
-      collapsed: true,
-      speedIdx: 0,
-      speeds: [20, 50, 100, 200, 500],
+    this.state = {
+      collapsed: props.initialStateCollapsed,
+      speedIdx: props.initialStateSpeedIdx,
+      speeds: props.initialStateSpeeds,
       record: false,
     };
-  },
+
+    // Bind methods
+    this.componentWillMount = this.componentWillMount.bind(this);
+    this.componentWillReceiveProps = this.componentWillReceiveProps.bind(this);
+    this.componentWillUnmount = this.componentWillUnmount.bind(this);
+
+    this.toggleRecord = this.toggleRecord.bind(this);
+    this.togglePanel = this.togglePanel.bind(this);
+    this.toggleLens = this.toggleLens.bind(this);
+    this.resetCamera = this.resetCamera.bind(this);
+    this.play = this.play.bind(this);
+    this.stop = this.stop.bind(this);
+    this.updateSpeed = this.updateSpeed.bind(this);
+  }
 
   // Auto mount listener unless notified otherwise
   componentWillMount() {
     this.attachListener(this.props.queryDataModel);
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     var previousDataModel = this.props.queryDataModel,
@@ -54,41 +39,41 @@ export default React.createClass({
       this.detachListener();
       this.attachListener(nextDataModel);
     }
-  },
+  }
 
   // Auto unmount listener
   componentWillUnmount() {
     this.detachListener();
-  },
+  }
 
   getRenderer() {
     return this.renderer;
-  },
+  }
 
   attachListener(dataModel) {
     this.detachListener();
     this.queryDataModelChangeSubscription = dataModel.onStateChange((data, envelope) => {
       this.forceUpdate();
     });
-  },
+  }
 
   detachListener() {
     if (this.queryDataModelChangeSubscription) {
       this.queryDataModelChangeSubscription.unsubscribe();
       this.queryDataModelChangeSubscription = null;
     }
-  },
+  }
 
   toggleRecord() {
     var record = !this.state.record;
     this.setState({ record });
     this.getRenderer().recordImages(record);
-  },
+  }
 
   togglePanel() {
     this.setState({ collapsed: !this.state.collapsed });
     this.props.queryDataModel.fetchData();
-  },
+  }
 
   toggleLens() {
     var magicLensController = this.props.magicLensController;
@@ -96,21 +81,21 @@ export default React.createClass({
       magicLensController.toggleLens();
       this.forceUpdate();
     }
-  },
+  }
 
   resetCamera() {
     if (this.isMounted() && (this.props.renderer === 'ImageRenderer' || this.props.renderer === 'GeometryRenderer')) {
       this.renderer.resetCamera();
     }
-  },
+  }
 
   play() {
     this.props.queryDataModel.animate(true, this.state.speeds[this.state.speedIdx]);
-  },
+  }
 
   stop() {
     this.props.queryDataModel.animate(false);
-  },
+  }
 
   updateSpeed() {
     var newIdx = (this.state.speedIdx + 1) % this.state.speeds.length,
@@ -120,57 +105,16 @@ export default React.createClass({
     if (queryDataModel.isAnimating()) {
       queryDataModel.animate(true, this.state.speeds[newIdx]);
     }
-  },
+  }
 
   /* eslint-disable complexity */
   render() {
-    var queryDataModel = this.props.queryDataModel,
-      magicLensController = this.props.magicLensController,
-      rootImageBuilder = magicLensController || this.props.imageBuilder,
-      renderer = null,
-      serverRecording = !!this.props.config.Recording,
-      isImageRenderer = (this.props.renderer === 'ImageRenderer'),
-      isMultiViewer = (this.props.renderer === 'MultiViewRenderer'),
-      isChartViewer = (this.props.renderer === 'PlotlyRenderer'),
-      isGeometryViewer = (this.props.renderer === 'GeometryRenderer');
+    const Renderer = this.props.rendererClass;
 
-    if (isImageRenderer) {
-      renderer = (
-        <ImageRenderer
-          ref={(c) => { this.renderer = c; }}
-          className={style.renderer}
-          imageBuilder={rootImageBuilder}
-          listener={this.props.mouseListener || rootImageBuilder.getListeners()}
-        />);
-    }
-
-    if (isMultiViewer) {
-      renderer = (
-        <MultiViewRenderer
-          ref={(c) => { this.renderer = c; }}
-          className={style.renderer}
-          renderers={this.props.renderers}
-          layout={this.props.layout}
-        />);
-    }
-
-    if (isGeometryViewer) {
-      renderer = (
-        <GeometryRenderer
-          ref={(c) => { this.renderer = c; }}
-          className={style.renderer}
-          geometryBuilder={this.props.geometryBuilder}
-        />);
-    }
-
-    if (isChartViewer) {
-      renderer = (
-        <PlotlyRenderer
-          ref={(c) => { this.renderer = c; }}
-          className={style.renderer}
-          chartBuilder={this.props.chartBuilder}
-        />);
-    }
+    const queryDataModel = this.props.queryDataModel;
+    const magicLensController = this.props.magicLensController;
+    const rootImageBuilder = magicLensController || this.props.imageBuilder;
+    const serverRecording = !!this.props.config.Recording;
 
     return (
       <div className={style.container}>
@@ -185,12 +129,12 @@ export default React.createClass({
               onClick={this.toggleLens}
             />
             <i
-              className={(serverRecording && isImageRenderer && this.props.imageBuilder.handleRecord)
+              className={(serverRecording && (this.props.renderer === 'ImageRenderer') && this.props.imageBuilder.handleRecord)
                 ? (this.state.record ? style.recordButtonOn : style.recordButtonOff) : style.hidden}
               onClick={this.toggleRecord}
             />
             <i
-              className={(isImageRenderer || isGeometryViewer) ? style.resetCameraButton : style.hidden}
+              className={(['ImageRenderer', 'GeometryRenderer'].indexOf(this.props.renderer) !== -1) ? style.resetCameraButton : style.hidden}
               onClick={this.resetCamera}
             />
             <i
@@ -220,9 +164,55 @@ export default React.createClass({
             {this.props.children}
           </div>
         </div>
-        {renderer}
+        <Renderer
+          // Common
+          className={style.renderer}
+          ref={(c) => { this.renderer = c; }}
+          userData={this.props.userData}
+
+          // ImageRenderer
+          imageBuilder={rootImageBuilder}
+          listener={this.props.mouseListener || (rootImageBuilder && rootImageBuilder.getListeners ? rootImageBuilder.getListeners() : null)}
+
+          // MultiViewRenderer
+          renderers={this.props.renderers}
+          layout={this.props.layout}
+
+          // GeometryRenderer
+          geometryBuilder={this.props.geometryBuilder}
+
+          // PlotlyRenderer
+          chartBuilder={this.props.chartBuilder}
+        />
       </div>
       );
-  },
+  }
   /* eslint-enable complexity */
-});
+}
+
+AbstractViewerMenu.propTypes = {
+  children: React.PropTypes.array,
+  config: React.PropTypes.object,
+  geometryBuilder: React.PropTypes.object,
+  imageBuilder: React.PropTypes.object,
+  chartBuilder: React.PropTypes.object,
+  layout: React.PropTypes.string,
+  magicLensController: React.PropTypes.object,
+  mouseListener: React.PropTypes.object,
+  queryDataModel: React.PropTypes.object,
+  renderer: React.PropTypes.string,
+  rendererClass: React.PropTypes.func,
+  renderers: React.PropTypes.object,
+  userData: React.PropTypes.object,
+  initialStateCollapsed: React.PropTypes.bool,
+  initialStateSpeedIdx: React.PropTypes.number,
+  initialStateSpeeds: React.PropTypes.array,
+};
+
+AbstractViewerMenu.defaultProps = {
+  config: {},
+  renderer: 'ImageRenderer',
+  initialStateCollapsed: true,
+  initialStateSpeedIdx: 0,
+  initialStateSpeeds: [20, 50, 100, 200, 500],
+};

@@ -12,7 +12,8 @@ const
     CTRL: 8,
   },
   eventTypeMapping = {
-    contextmenu: 'contextmenu',
+    mousemove: 'zoom',
+    mouseup: 'zoom',
     mousewheel: 'zoom',
     DOMMouseScroll: 'zoom',
   },
@@ -40,6 +41,10 @@ function getRelative(el, event) {
 }
 
 function broadcast(ctx, topic, event) {
+  if (!ctx.mouseEnabled) {
+    return;
+  }
+
   event.preventDefault();
 
   event.button = 0;
@@ -67,6 +72,7 @@ export default class MouseHandler {
 
     handlerCount += 1;
     this.id = `mouse_handler_${handlerCount}`;
+    this.mouseEnabled = true;
     this.el = domElement;
     this.modifier = 0;
     this.toggleModifiers = [0];
@@ -89,11 +95,22 @@ export default class MouseHandler {
     };
 
     this.domEventHandler = (e) => {
+      if (!this.mouseEnabled) {
+        return true;
+      }
+
+      if (!this.inRightClickHandling && ['mousemove', 'mouseup'].indexOf(e.type) !== -1) {
+        return true;
+      } else if (e.type === 'contextmenu') {
+        this.inRightClickHandling = true;
+      }
+
       e.preventDefault();
+
       const event = {
         srcEvent: e,
-        button: (e.type === 'contextmenu') ? 2 : 0,
-        topic: eventTypeMapping[e.type],
+        button: (this.inRightClickHandling) ? 2 : 0,
+        topic: eventTypeMapping[e.type] || 'zoom',
 
         center: {
           x: e.clientX,
@@ -155,6 +172,11 @@ export default class MouseHandler {
       }
 
       this.emit(event.topic, event);
+
+      if (e.type === 'mouseup') {
+        this.inRightClickHandling = false;
+      }
+
       return false;
     };
 
@@ -222,6 +244,8 @@ export default class MouseHandler {
 
     // Manage events that are not captured by hammer
     this.el.addEventListener('contextmenu', this.domEventHandler);
+    this.el.addEventListener('mousemove', this.domEventHandler);
+    this.el.addEventListener('mouseup', this.domEventHandler);
     this.el.addEventListener('mousewheel', this.domEventHandler);
     this.el.addEventListener('DOMMouseScroll', this.domEventHandler);
   }
@@ -241,6 +265,10 @@ export default class MouseHandler {
     this.toggleModifierEnable = enable;
   }
 
+  setEnable(enableMouse = true) {
+    this.mouseEnabled = !!enableMouse;
+  }
+
   attach(listeners) {
     var subscriptions = {};
     Object.keys(listeners).forEach((key) => {
@@ -258,6 +286,8 @@ export default class MouseHandler {
 
     // Remove events that are not captured by hammer
     this.el.removeEventListener('contextmenu', this.domEventHandler);
+    this.el.removeEventListener('mousemove', this.domEventHandler);
+    this.el.removeEventListener('mouseup', this.domEventHandler);
     this.el.removeEventListener('mousewheel', this.domEventHandler);
     this.el.removeEventListener('DOMMouseScroll', this.domEventHandler);
   }

@@ -37,9 +37,9 @@ function histogramSelector(publicAPI, model) {
   // to before fewer histograms are created to fill the container's width
   let minBoxSize = 200;
   // smallest we'll let it go. Limits boxesPerRow in header GUI.
-  const minBoxSizeLimit = 115;
+  const minBoxSizeLimit = 125;
   const legendSize = 15;
-  const iconSize = 21.3;
+  const iconSize = 24.3;
   // hard coded because I did not figure out how to
   // properly query this value from our container.
   const borderSize = 6;
@@ -47,8 +47,6 @@ function histogramSelector(publicAPI, model) {
   const scrollbarWidth = 16;
 
   let displayOnlySelected = false;
-
-  let lastNumFields = 0;
 
   const scoreHelper = score(publicAPI, model);
 
@@ -207,7 +205,6 @@ function histogramSelector(publicAPI, model) {
     if (index < 0) index = fieldNames.length - 1;
 
     model.singleModeName = fieldNames[index];
-    lastNumFields = 0;
     publicAPI.render();
   }
 
@@ -338,11 +335,8 @@ function histogramSelector(publicAPI, model) {
   // other histograms in the fields list is disabled.
   // Calling requestNumBoxesPerRow() re-enables switching.
   publicAPI.displaySingleHistogram = (fieldName, disableSwitch) => {
-    model.singleModeName = null;
-    model.singleModeSticky = false;
-    if (model.fieldData[fieldName]) {
-      toggleSingleModeEvt(model.fieldData[fieldName]);
-    }
+    model.singleModeName = fieldName;
+    model.scrollToName = fieldName;
     if (model.singleModeName && disableSwitch) {
       model.singleModeSticky = true;
     } else {
@@ -406,8 +400,7 @@ function histogramSelector(publicAPI, model) {
       return;
     }
 
-    const updateBoxPerRow = updateSizeInformation(model.singleModeName !== null);
-
+    updateSizeInformation(model.singleModeName !== null);
     let fieldNames = getCurrentFieldNames();
 
     updateHeader(fieldNames.length);
@@ -416,12 +409,14 @@ function histogramSelector(publicAPI, model) {
       fieldNames = [model.singleModeName];
     }
 
-    if (updateBoxPerRow || fieldNames.length !== lastNumFields) {
-      lastNumFields = fieldNames.length;
-
+    // If we find down the road that it's too expensive to re-populate the nest
+    // all the time, we can try to come up with the proper guards that make sure
+    // we do whenever we need it, but not more.  For now, we just make sure we
+    // always get the updates we need.
+    if (fieldNames.length > 0) {
       // get the data and put it into the nest based on the
       // number of boxesPerRow
-      const mungedData = fieldNames.map((name) => {
+      const mungedData = fieldNames.filter(name => model.fieldData[name]).map((name) => {
         const d = model.fieldData[name];
         return d;
       });
@@ -769,6 +764,7 @@ function histogramSelector(publicAPI, model) {
         .append('div')
         .classed(style.histogramSelector, true);
 
+      model.parameterList.append('span').classed(style.parameterScrollFix, true);
       publicAPI.resize();
 
       setImmediate(scoreHelper.updateFieldAnnotations);
@@ -784,25 +780,48 @@ function histogramSelector(publicAPI, model) {
     });
   }
 
+  function createFieldData(fieldName) {
+    return Object.assign(
+      model.fieldData[fieldName] || {},
+      model.provider.getField(fieldName),
+      scoreHelper.defaultFieldData());
+  }
+
   // Auto unmount on destroy
   model.subscriptions.push({ unsubscribe: publicAPI.setContainer });
 
   if (model.provider.isA('FieldProvider')) {
-    const fieldNames = model.provider.getFieldNames();
     if (!model.fieldData) {
       model.fieldData = {};
     }
 
-    fieldNames.forEach((name) => {
-      model.fieldData[name] = Object.assign(
-        model.fieldData[name] || {},
-        model.provider.getField(name),
-        scoreHelper.defaultFieldData());
+    model.provider.getFieldNames().forEach((name) => {
+      model.fieldData[name] = createFieldData(name);
     });
 
     model.subscriptions.push(model.provider.onFieldChange((field) => {
-      Object.assign(model.fieldData[field.name], field);
-      publicAPI.render();
+      if (field && model.fieldData[field.name]) {
+        Object.assign(model.fieldData[field.name], field);
+        publicAPI.render();
+      } else {
+        const fieldNames = model.provider.getFieldNames();
+        if (field) {
+          model.fieldData[field.name] = createFieldData(field.name);
+        } else {
+          // check for deleted field. Delete our fieldData if so. Ensures subscription remains up-to-date.
+          Object.keys(model.fieldData).forEach((name) => {
+            if (fieldNames.indexOf(name) === -1) {
+              delete model.fieldData[name];
+            }
+          });
+        }
+        model.histogram1DDataSubscription.update(
+          fieldNames,
+          {
+            numberOfBins: model.numberOfBins,
+            partial: true,
+          });
+      }
     }));
   }
 
@@ -859,9 +878,7 @@ function histogramSelector(publicAPI, model) {
         if (annotation.selection.type === 'partition') {
           const fieldName = annotation.selection.partition.variable;
           if (model.fieldData[fieldName]) {
-            model.fieldData[fieldName].annotation = null;
-            model.fieldData[fieldName].dividers = undefined;
-            model.fieldData[fieldName].editScore = false;
+            scoreHelper.clearFieldAnnotation(fieldName);
             publicAPI.render(fieldName);
           }
         }
@@ -917,6 +934,8 @@ const DEFAULT_VALUES = {
   selectedDef: null,
 
   numberOfBins: 32,
+  // display UI for setting uncertainty at dividers.
+  showUncertainty: true,
 };
 
 // ----------------------------------------------------------------------------
@@ -926,8 +945,8 @@ export function extend(publicAPI, model, initialValues = {}) {
 
   CompositeClosureHelper.destroy(publicAPI, model);
   CompositeClosureHelper.isA(publicAPI, model, 'VizComponent');
-  CompositeClosureHelper.get(publicAPI, model, ['provider', 'container', 'numberOfBins']);
-  CompositeClosureHelper.set(publicAPI, model, ['numberOfBins']);
+  CompositeClosureHelper.get(publicAPI, model, ['provider', 'container', 'numberOfBins', 'showUncertainty']);
+  CompositeClosureHelper.set(publicAPI, model, ['numberOfBins', 'showUncertainty']);
   CompositeClosureHelper.dynamicArray(publicAPI, model, 'readOnlyFields');
 
   histogramSelector(publicAPI, model);

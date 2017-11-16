@@ -11,7 +11,6 @@ import Histogram1DProvider from '../../../../../src/InfoViz/Core/Histogram1DProv
 import HistogramBinHoverProvider from '../../../../../src/InfoViz/Core/HistogramBinHoverProvider';
 import ScoresProvider from '../../../../../src/InfoViz/Core/ScoresProvider';
 import SelectionProvider from '../../../../../src/InfoViz/Core/SelectionProvider';
-
 import HistogramSelector from '../../../Native/HistogramSelector';
 import FieldSelector from '../../../Native/FieldSelector';
 

@@ -159,8 +159,14 @@ function informationDiagram(publicAPI, model) {
     }
   };
 
-  // need a unique groupID whenever a group is added.
-  let groupID = 0;
+  // track chord mode between renders
+  const pmiChordMode = {
+    mode: PMI_CHORD_MODE_NONE,
+    srcParam: null,
+    srcBin: null,
+    miIndex: -1,
+  };
+
 
   publicAPI.render = () => {
     // Extract provider data for local access
@@ -200,13 +206,6 @@ function informationDiagram(publicAPI, model) {
       .classed(style.informationDiagramSvgHide, false)
       .classed(style.informationDiagramSvgShow, true);
 
-    const pmiChordMode = {
-      mode: PMI_CHORD_MODE_NONE,
-      srcParam: null,
-      srcBin: null,
-      miIndex: -1,
-    };
-
     const outerHistoRadius = Math.min(width, height) / 2;
     const veryOutermostRadius = outerHistoRadius + 80;
     const histoRadius = outerHistoRadius - 20;
@@ -224,6 +223,10 @@ function informationDiagram(publicAPI, model) {
 
     const histoArc = d3.svg.arc().innerRadius(outerRadius + 10);
 
+    const insideArc = d3.svg.arc()
+      .innerRadius(1)
+      .outerRadius(innerRadius);
+
     const layout = d3
       .layout
       .chord()
@@ -233,7 +236,6 @@ function informationDiagram(publicAPI, model) {
 
     const path = d3.svg.chord().radius(innerRadius);
 
-    // Remove previous SVG
     let svgParent = d3.select(model.container).select('svg');
     let svg = svgParent.select('.main-circle');
     if (svgParent.empty()) {
@@ -327,6 +329,13 @@ function informationDiagram(publicAPI, model) {
           lastAnnotationPushed = model.provider.getAnnotation();
           if (!lastAnnotationPushed || model.provider.shouldCreateNewAnnotation() || lastAnnotationPushed.selection.type !== 'range') {
             lastAnnotationPushed = AnnotationBuilder.annotation(selection, [model.defaultScore], model.defaultWeight);
+            if (lastAnnotationPushed.name === '') {
+              // set default range annotation name
+              AnnotationBuilder.setDefaultName(lastAnnotationPushed);
+              if (model.provider.isA('AnnotationStoreProvider')) {
+                lastAnnotationPushed.name = model.provider.getNextStoredAnnotationName(lastAnnotationPushed.name);
+              }
+            }
           } else {
             lastAnnotationPushed = AnnotationBuilder.update(lastAnnotationPushed, {
               selection,
@@ -428,7 +437,7 @@ function informationDiagram(publicAPI, model) {
     function drawPMIAllBinsTwoVars() {
       const d = model.renderState.pmiAllBinsTwoVars.d;
       if (d.source.index === d.target.index) {
-        console.log('Cannot render self-PMI', model.mutualInformationData.vmap[d.source.index].name);
+        // console.log('Cannot render self-PMI', model.mutualInformationData.vmap[d.source.index].name);
         return;
       }
 
@@ -524,6 +533,7 @@ function informationDiagram(publicAPI, model) {
         const info = findGroupAndBin(overCoords);
         let clearStatusBar = false;
         let groupHoverName = null;
+        let groupInsideName = null;
         let highlightAllGroups = false;
 
         for (let idx = 0; idx < variableList.length; ++idx) {
@@ -535,6 +545,7 @@ function informationDiagram(publicAPI, model) {
           clearStatusBar = true;
         } else if (info.found) {
           if (info.radius > innerRadius && info.radius <= outerRadius) groupHoverName = info.group;
+          else if (info.radius <= innerRadius) groupInsideName = info.group;
 
           let binMap = {};
           if (!(info.radius <= innerRadius && pmiChordMode.mode === PMI_CHORD_MODE_NONE)) {
@@ -565,6 +576,10 @@ function informationDiagram(publicAPI, model) {
         svg
           .selectAll(`g.group path[id^=\'${model.instanceID}-group\']`)
           .classed(style.hoverOutline, (data, idx) => highlightAllGroups || model.mutualInformationData.vmap[idx].name === groupHoverName);
+
+        // show mouse-interaction guide inside the legend arcs.
+        svg.selectAll('g.group').select(`.${style.jsMouseArc}`)
+          .attr('class', (data, idx) => (model.mutualInformationData.vmap[idx].name === groupInsideName ? style.mouseArcViz : style.mouseArcHidden));
 
         if (clearStatusBar === true) {
           publicAPI.updateStatusBarText('');
@@ -643,18 +658,22 @@ function informationDiagram(publicAPI, model) {
     // Add a group per neighborhood.
     const group = svg
       .selectAll('.group')
-      .data(layout.groups, () => { groupID += 1; return groupID; });
+      // set a key === field name, so groups are re-used. Need a fall-back for removed fields, though.
+      .data(layout.groups, d => (model.mutualInformationData.vmap[d.index] ? model.mutualInformationData.vmap[d.index].name : d.index));
     const groupEnter = group
       .enter()
       .append('g')
       .classed('group', true)
       .classed(style.group, true);
 
-
     // Add the group arc.
     groupEnter
       .append('path')
       .attr('id', (d, i) => `${model.instanceID}-group${i}`);
+    // add mouse-interaction arc - show where mouse affects this group's chords.
+    groupEnter
+      .append('path')
+      .classed(style.mouseArcHidden, true);
 
     // Add a text label.
     const groupText = groupEnter
@@ -663,34 +682,41 @@ function informationDiagram(publicAPI, model) {
       .attr('dy', 15);
 
     if (!model.textLengthMap) model.textLengthMap = {};
-    // pull a stunt to measure text length - use a straight path, then switch to the real curved one.
-    const textPath = groupText
+    groupText
       .append('textPath')
-      .attr('xlink:href', '#straight-text-path')
       .attr('startOffset', '25%')
-      .text((d, i) => model.mutualInformationData.vmap[i].name)
-      .each(function textLen(d, i) {
-        model.textLengthMap[model.mutualInformationData.vmap[i].name] = this.getComputedTextLength();
-      });
-
-    textPath
-      .attr('xlink:href', (d, i) => `#${model.instanceID}-group${i}`);
+      .text((d, i) => model.mutualInformationData.vmap[i].name);
 
     // enter + update items.
     const groupPath = group.select('path')
       .attr('d', arc);
-    // Remove the labels that don't fit, or shorten label, using ...
-    group
-      .select('text').select('textPath')
+    group.select(`.${style.jsMouseArc}`)
+      .attr('d', insideArc);
+
+    const textPath = group
+      .select('text').select('textPath');
+
+    // pull a stunt to measure text length - use a straight path, then switch to the real curved one.
+    textPath.filter(d => (!model.textLengthMap[model.mutualInformationData.vmap[d.index].name]))
+      .text(d => model.mutualInformationData.vmap[d.index].name)
+      .attr('xlink:href', '#straight-text-path')
+      .each(function textLen(d) {
+        model.textLengthMap[model.mutualInformationData.vmap[d.index].name] = this.getComputedTextLength();
+      });
+
+    textPath
+      .attr('xlink:href', (d, i) => `#${model.instanceID}-group${d.index}`)
+      // Remove the labels that don't fit, or shorten label, using ...
       .each(function truncate(d, i) {
         d.textShown = true;
         const availLength = ((groupPath[0][d.index].getTotalLength() / 2) - deltaRadius - model.glyphSize);
         // shorten text based on string length vs initial total length.
-        const fullText = model.mutualInformationData.vmap[d.index].name;
+        const fullText = model.mutualInformationData.vmap[i].name;
         const textLength = model.textLengthMap[fullText];
         const strLength = fullText.length;
         // we fit! done.
         if (textLength <= availLength) {
+          d3.select(this).text(fullText);
           d.textLength = textLength;
           return;
         }
@@ -724,9 +750,9 @@ function informationDiagram(publicAPI, model) {
       // .remove(); ie11 throws errors if we use .remove() - hide instead.
 
 
-    // Add group for glyph
-    if (getLegend) {
-      group.each(function addLegend(glyphData) {
+    // Add group for glyph, or assign color as fallback.
+    group.each(function addLegend(glyphData) {
+      if (getLegend) {
         let glyph = d3.select(this).select('g.glyph');
         if (glyph.empty()) {
           glyph = d3.select(this)
@@ -766,8 +792,18 @@ function informationDiagram(publicAPI, model) {
           // glyph.remove(); ie11 objects, hide instead.
           glyph.attr('display', 'none');
         }
-      });
-    }
+      } else {
+        model.mutualInformationData.vmap[glyphData.index].color = cmap(glyphData.index);
+      }
+    });
+
+    // Add the color to the group arc
+    group
+      .select('path')
+      .style('fill', d => model.mutualInformationData.vmap[d.index].color || 'red');
+    group
+      .select(`.${style.jsMouseArc}`)
+      .style('fill', d => model.mutualInformationData.vmap[d.index].color || 'red');
 
     function getParamBinRange(index, numberOfBins, paramName) {
       const paramRange = model.provider.getField(paramName).range;
@@ -790,16 +826,6 @@ function informationDiagram(publicAPI, model) {
         const gvar = model.histogramData[gname];
 
         if (!gvar) return;
-
-        // Set the color if it hasn't already been set
-        if (!getLegend) {
-          model.mutualInformationData.vmap[groupData.index].color = cmap(groupData.index);
-        }
-
-        // Add the color to the group arc
-        d3.select(this)
-          .select('path')
-          .style('fill', model.mutualInformationData.vmap[groupData.index].color || 'red');
 
         groupData.range = [gvar.min, gvar.max, gvar.max - gvar.min];
 
@@ -841,6 +867,11 @@ function informationDiagram(publicAPI, model) {
       pmiChordMode.srcParam = null;
       pmiChordMode.srcBin = null;
       pmiChordMode.miIndex = -1;
+      model.renderState = {
+        pmiAllBinsTwoVars: null,
+        pmiOneBinAllVars: null,
+        pmiHighlight: null,
+      };
       updateChordVisibility({ mi: { show: true } });
     }
     // do we need to reset?
@@ -909,14 +940,17 @@ function informationDiagram(publicAPI, model) {
         }
       });
 
-    if (model.renderState.pmiAllBinsTwoVars !== null) {
+    if (model.renderState.pmiAllBinsTwoVars !== null && pmiChordMode.mode === PMI_CHORD_MODE_ALL_BINS_TWO_VARS) {
       drawPMIAllBinsTwoVars();
-    } else if (model.renderState.pmiOneBinAllVars !== null) {
+    } else if (model.renderState.pmiOneBinAllVars !== null && pmiChordMode.mode === PMI_CHORD_MODE_ONE_BIN_ALL_VARS) {
       const { group: g, bin: b, d, i } = model.renderState.pmiOneBinAllVars;
       drawPMIOneBinAllVars(g, b)(d, i);
+    } else {
+      // only happens on 'needReset', above.
+      // showAllChords();
     }
 
-    if (model.renderState.pmiHighlight !== null) {
+    if (model.renderState.pmiHighlight !== null && pmiChordMode.mode !== PMI_CHORD_MODE_NONE) {
       findPmiChordsToHighlight();
     }
 

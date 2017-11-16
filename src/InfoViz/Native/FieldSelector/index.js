@@ -24,7 +24,7 @@ function fieldSelector(publicAPI, model) {
   };
   // Data for display icons. 'all' displays two overlaid icons, others show one icon.
   const modeIcons = {
-    'all': [
+    all: [
       {
         top: '-3px',
         left: '-4px',
@@ -38,7 +38,7 @@ function fieldSelector(publicAPI, model) {
         display: null,
       },
     ],
-    'selected': [
+    selected: [
       {
         top: '-3px',
         left: '-4px',
@@ -52,7 +52,7 @@ function fieldSelector(publicAPI, model) {
         display: null,
       },
     ],
-    'unselected': [
+    unselected: [
       {
         top: '0px',
         left: '0px',
@@ -66,7 +66,7 @@ function fieldSelector(publicAPI, model) {
         display: 'none',
       },
     ],
-  }
+  };
 
   // storage for 1d histograms
   if (!model.histograms) {
@@ -158,15 +158,15 @@ function fieldSelector(publicAPI, model) {
     publicAPI.render();
   };
 
-  publicAPI.handleFieldChange = (field) => {
-    if (field && model.fieldsToRender) {
-      const index = model.fieldsToRender.findIndex(fieldInfo => (fieldInfo.name === field.name));
-      if (index !== -1) {
-        model.fieldsToRender[index].active = field.active;
-      }
-    }
-    publicAPI.render();
-  };
+  // publicAPI.handleFieldChange = (field) => {
+  //   if (field && model.fieldsToRender) {
+  //     const index = model.fieldsToRender.findIndex(fieldInfo => (fieldInfo.name === field.name));
+  //     if (index !== -1) {
+  //       model.fieldsToRender[index].active = field.active;
+  //     }
+  //   }
+  //   publicAPI.render();
+  // };
 
   publicAPI.setFieldsToRender = (info) => {
     if (info) {
@@ -221,7 +221,8 @@ function fieldSelector(publicAPI, model) {
     // Set display-mode icons
     d3.select(model.innerDiv).select(`.${style.jsFieldSelectorMode}`)
       .on('click', displayClick)
-      .selectAll('i').data(modeIcons[model.display])
+      .selectAll('i')
+      .data(modeIcons[model.display])
       .attr('class', d => (d.className))
       .style('display', d => (d.display))
       .style('top', d => (d.top))
@@ -575,8 +576,25 @@ function fieldSelector(publicAPI, model) {
 
   // Make sure default values get applied
   publicAPI.setContainer(model.container);
+
   model.subscriptions.push({ unsubscribe: publicAPI.setContainer });
-  model.subscriptions.push(model.provider.onFieldChange(publicAPI.handleFieldChange));
+
+  model.subscriptions.push(model.provider.onFieldChange(() => {
+    // if (field && model.fieldsToRender) {
+    //   const index = model.fieldsToRender.findIndex(fieldInfo => (fieldInfo.name === field.name));
+    //   if (index !== -1) {
+    //     model.fieldsToRender[index].active = field.active;
+    //   }
+    // }
+    publicAPI.render();
+    model.histogram1DDataSubscription.update(
+      model.provider.getFieldNames(),
+      {
+        numberOfBins: model.numberOfBins,
+        partial: true,
+      });
+  }));
+
   if (model.fieldShowHistogram) {
     if (model.provider.isA('Histogram1DProvider')) {
       model.histogram1DDataSubscription = model.provider.subscribeToHistogram1D(

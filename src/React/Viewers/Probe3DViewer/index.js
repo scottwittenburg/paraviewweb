@@ -8,6 +8,7 @@ import LookupTableManagerControl    from '../../CollapsibleControls/LookupTableM
 import ProbeControl                 from '../../CollapsibleControls/ProbeControl';
 import CollapsibleWidget            from '../../Widgets/CollapsibleWidget';
 import QueryDataModelWidget         from '../../Widgets/QueryDataModelWidget';
+import ImageRenderer                from '../../Renderers/ImageRenderer';
 
 const
   renderAxisMap = {
@@ -25,6 +26,7 @@ export default React.createClass({
     imageBuilder: React.PropTypes.object.isRequired,
     probe: React.PropTypes.bool,
     queryDataModel: React.PropTypes.object.isRequired,
+    userData: React.PropTypes.object,
   },
 
   getDefaultProps() {
@@ -55,6 +57,7 @@ export default React.createClass({
       imageBuilder = this.props.imageBuilder;
 
     this.dragChartFlag = false;
+    this.liveChartAxis = 0;
 
     // Update probe chart data if data change
     this.queryDataModelDataSubscription = queryDataModel.onDataChange((data, envelope) => {
@@ -159,12 +162,12 @@ export default React.createClass({
   },
 
   render() {
-    var queryDataModel = this.props.queryDataModel,
-      imageBuilder = this.props.imageBuilder,
-      dimensions = imageBuilder.metadata.dimensions,
-      axisMap = renderAxisMap[this.props.imageBuilder.getRenderMethod()];
+    const queryDataModel = this.props.queryDataModel;
+    const imageBuilder = this.props.imageBuilder;
+    const dimensions = imageBuilder.metadata.dimensions;
+    const axisMap = renderAxisMap[this.props.imageBuilder.getRenderMethod()];
 
-    var buttonClasses = [];
+    const buttonClasses = [];
     [0, 1, 2].forEach((el) => {
       var classes = [];
       if (axisMap[2] === el) {
@@ -179,7 +182,12 @@ export default React.createClass({
 
     return (
       <div className={style.container}>
-        <AbstractViewerMenu queryDataModel={queryDataModel} imageBuilder={imageBuilder} mouseListener={imageBuilder.getListeners()}>
+        <AbstractViewerMenu
+          queryDataModel={queryDataModel}
+          imageBuilder={imageBuilder}
+          mouseListener={imageBuilder.getListeners()}
+          rendererClass={ImageRenderer}
+        >
           <LookupTableManagerControl
             key="LookupTableManagerWidget"
             lookupTableManager={imageBuilder.lookupTableManager}

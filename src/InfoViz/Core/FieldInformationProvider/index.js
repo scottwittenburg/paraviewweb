@@ -41,8 +41,8 @@ export function extend(publicAPI, model, initialValues = {}) {
               Object.assign(storage.fieldMapping[name], data.fieldMapping[name]);
           } else {
             console.log('TODO: Implement renumbering of existing row/col');
-            throw `Field ${name} already at ${storage.fieldMapping[name].id}; ` +
-              `not moving to ${data.fieldMapping[name].id}.`;
+            throw new Error(`Field ${name} already at ${storage.fieldMapping[name].id}; ` +
+              `not moving to ${data.fieldMapping[name].id}.`);
           }
         } else {
           unchanged = false;
@@ -55,7 +55,7 @@ export function extend(publicAPI, model, initialValues = {}) {
           storage.mutualInformation = data.mutualInformation;
         } else {
           console.log('TODO: Implement merge of mutual information');
-          throw 'Mutual information present in both state and data. Not handled yet.';
+          throw new Error('Mutual information present in both state and data. Not handled yet.');
         }
       }
       if ('variationOfInformation' in data) {
@@ -63,7 +63,7 @@ export function extend(publicAPI, model, initialValues = {}) {
           storage.variationOfInformation = data.variationOfInformation;
         } else {
           console.log('TODO: Implement merge of variation of information');
-          throw 'variation of information present in both state and data. Not handled yet.';
+          throw new Error('variation of information present in both state and data. Not handled yet.');
         }
       }
       ['smiTheta', 'taylorPearson', 'taylorTheta', 'taylorR', 'entropy'].forEach((key) => {
@@ -72,7 +72,7 @@ export function extend(publicAPI, model, initialValues = {}) {
             storage[key] = data[key];
           } else {
             console.log(`TODO: Implement merge of ${key}`);
-            throw `${key} present in both state and data. Not handled yet.`;
+            throw new Error(`${key} present in both state and data. Not handled yet.`);
           }
         }
       });

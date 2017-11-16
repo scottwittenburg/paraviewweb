@@ -92,9 +92,9 @@ function lineCircleIntersectFragile(pp, dd, cc, rr) {
   * [arc]:  https://www.w3.org/TR/SVG/paths.html#PathDataEllipticalArcCommands
   * [line]: https://www.w3.org/TR/SVG/paths.html#PathDataLinetoCommands
   */
-//@{
+// @{
 
-/// This variant takes a single pair of points as inputs (i.e., p0 and p1 arrays of coordinates) and returns a single path.
+// This variant takes a single pair of points as inputs (i.e., p0 and p1 arrays of coordinates) and returns a single path.
 export function hyperbolicPlaneGeodesicOnPoincareDisk(p0, p1, focus, scale) {
   // Translate all the points in xh to the focal point:
   const tx = pt => pt.map((coord, ii) => (coord - focus[ii]) / scale);
@@ -180,7 +180,7 @@ export function hyperbolicPlaneGeodesicsOnPoincareDisk(p0, p1, focus, scale) {
   }));
 }
 
-//@}
+// @}
 
 /** \brief Compute the Poincaré disk coordinates of points along geodesics between pairs of hyperbolic plane coordinates.
   *

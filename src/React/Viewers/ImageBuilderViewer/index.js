@@ -2,27 +2,13 @@ import React                from 'react';
 
 import AbstractViewerMenu   from '../AbstractViewerMenu';
 import WidgetFactory        from '../../CollapsibleControls/CollapsibleControlFactory';
+import ImageRenderer        from '../../Renderers/ImageRenderer';
 
-export default React.createClass({
 
-  displayName: 'ImageBuilderViewer',
-
-  propTypes: {
-    config: React.PropTypes.object,
-    imageBuilder: React.PropTypes.object.isRequired,
-    menuAddOn: React.PropTypes.array,
-    queryDataModel: React.PropTypes.object.isRequired,
-  },
-
-  getDefaultProps() {
-    return {
-      config: {},
-    };
-  },
-
+export default class ImageBuilderViewer extends React.Component {
   componentWillMount() {
     this.attachListener(this.props.imageBuilder);
-  },
+  }
 
   componentWillReceiveProps(nextProps) {
     var previousDataModel = this.props.imageBuilder,
@@ -34,11 +20,11 @@ export default React.createClass({
         this.attachListener(nextDataModel);
       }
     }
-  },
+  }
 
   componentWillUnmount() {
     this.detachListener();
-  },
+  }
 
   attachListener(dataModel) {
     this.detachListener();
@@ -47,14 +33,14 @@ export default React.createClass({
         this.forceUpdate();
       });
     }
-  },
+  }
 
   detachListener() {
     if (this.changeSubscription) {
       this.changeSubscription.unsubscribe();
       this.changeSubscription = null;
     }
-  },
+  }
 
   render() {
     var queryDataModel = this.props.queryDataModel,
@@ -69,13 +55,30 @@ export default React.createClass({
 
     return (
       <AbstractViewerMenu
+        {...this.props}
+
         queryDataModel={queryDataModel}
         magicLensController={magicLensController}
         imageBuilder={imageBuilder}
+        userData={this.props.userData}
         config={this.props.config || {}}
+        rendererClass={ImageRenderer}
       >
         {controlWidgets}
       </AbstractViewerMenu>
     );
-  },
-});
+  }
+}
+
+ImageBuilderViewer.propTypes = {
+  config: React.PropTypes.object,
+  imageBuilder: React.PropTypes.object.isRequired,
+  menuAddOn: React.PropTypes.array,
+  queryDataModel: React.PropTypes.object.isRequired,
+  userData: React.PropTypes.object,
+};
+
+ImageBuilderViewer.defaultProps = {
+  config: {},
+  userData: {},
+};

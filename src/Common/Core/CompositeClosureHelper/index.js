@@ -1,5 +1,5 @@
 // ----------------------------------------------------------------------------
-// capitilze provided string
+// capitalize provided string
 // ----------------------------------------------------------------------------
 
 export function capitalize(str) {
@@ -234,12 +234,14 @@ function chain(...fn) {
 //     - fireMutualInformationSubscriptionChange(request)
 //     - subscribeToMutualInformation(onDataReady, variables = [], metadata = {})
 //     - setMutualInformation(data)
+//     - hasMutualInformation(request, variable)
 //     - destroy()
 // ----------------------------------------------------------------------------
 
 function dataSubscriber(publicAPI, model, dataName, dataHandler) {
   // Private members
   const dataSubscriptions = [];
+  let forceFlushRequests = 0;
   const eventName = `${dataName}SubscriptionChange`;
   const fireMethodName = `fire${capitalize(eventName)}`;
   const dataContainerName = `${dataName}_storage`;
@@ -265,7 +267,8 @@ function dataSubscriber(publicAPI, model, dataName, dataHandler) {
     try {
       if (dataListener) {
         const dataToForward = dataHandler.get(model[dataContainerName], dataListener.request, dataChanged);
-        if (dataToForward && JSON.stringify(dataToForward) !== dataListener.request.lastPush) {
+        if (dataToForward
+          && (JSON.stringify(dataToForward) !== dataListener.request.lastPush || dataListener.request.metadata.forceFlush)) {
           dataListener.request.lastPush = JSON.stringify(dataToForward);
           dataListener.onDataReady(dataToForward);
         }
@@ -278,6 +281,10 @@ function dataSubscriber(publicAPI, model, dataName, dataHandler) {
   // onDataReady function will be called each time the setXXX method will be called and
   // when the actual subscription correspond to the data that has been set.
   // This is performed synchronously.
+  // The default behavior is to avoid pushing data to subscribers if nothing has changed
+  // since the last push.  However, by providing "forceFlush: true" in the metadata,
+  // subscribers can indicate that they want data pushed to them even if there has been
+  // no change since the last push.
   publicAPI[`subscribeTo${capitalize(dataName)}`] = (onDataReady, variables = [], metadata = {}) => {
     const id = dataSubscriptions.length;
     const request = {
@@ -285,6 +292,9 @@ function dataSubscriber(publicAPI, model, dataName, dataHandler) {
       variables,
       metadata: Object.assign({}, dataHandler.defaultMetadata, metadata),
     };
+    if (request.metadata.forceFlush) {
+      forceFlushRequests += 1;
+    }
     const dataListener = { onDataReady, request };
     dataSubscriptions.push(dataListener);
     publicAPI[fireMethodName](request);
@@ -292,11 +302,17 @@ function dataSubscriber(publicAPI, model, dataName, dataHandler) {
     return {
       unsubscribe() {
         request.action = 'unsubscribe';
+        if (request.metadata.forceFlush) {
+          forceFlushRequests -= 1;
+        }
         publicAPI[fireMethodName](request);
         dataSubscriptions[id] = null;
       },
       update(vars, meta) {
         request.variables = [].concat(vars);
+        if (meta && meta.forceFlush !== request.metadata.forceFlush) {
+          forceFlushRequests += (meta.forceFlush ? 1 : -1);
+        }
         request.metadata = Object.assign({}, request.metadata, meta);
         publicAPI[fireMethodName](request);
         flushDataToListener(dataListener, null);
@@ -307,9 +323,27 @@ function dataSubscriber(publicAPI, model, dataName, dataHandler) {
   // Method use to store data
   publicAPI[`set${capitalize(dataName)}`] = (data) => {
     // Process all subscription to see if we can trigger a notification
-    if (!dataHandler.set(model[dataContainerName], data)) {
+    if (!dataHandler.set(model[dataContainerName], data) || forceFlushRequests > 0) {
       dataSubscriptions.forEach(dataListener => flushDataToListener(dataListener, data));
     }
+  };
+
+  // Retrieve data for a single variable from our cache, given current request.
+  // Call from inside on{dataName}SubscriptionChange to find out if
+  // cache needs to be updated.
+  publicAPI[`has${capitalize(dataName)}`] = (inRequest, variable) => {
+    try {
+      if (inRequest) {
+        const request = Object.assign({}, inRequest, { variables: [variable] });
+        const dataToForward = dataHandler.get(model[dataContainerName], request, null);
+        if (dataToForward) {
+          return true;
+        }
+      }
+    } catch (err) {
+      console.log(`has ${dataName} error caught:`, err);
+    }
+    return false;
   };
 
   publicAPI.destroy = chain(off, publicAPI.destroy);

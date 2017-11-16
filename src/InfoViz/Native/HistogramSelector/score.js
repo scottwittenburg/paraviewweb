@@ -1,4 +1,5 @@
 import d3 from 'd3';
+import deepEquals from 'mout/src/lang/deepEquals';
 
 import style from 'PVWStyle/InfoVizNative/HistogramSelector.mcss';
 
@@ -92,6 +93,14 @@ export default function init(inPublicAPI, inModel) {
     // Construct a partition annotation:
     let partitionAnnotation = null;
     if (def.annotation && !model.provider.shouldCreateNewAnnotation()) {
+      // don't send a new selection unless it's changed.
+      const saveGen = partitionSelection.generation;
+      partitionSelection.generation = def.annotation.selection.generation;
+      const changeSet = { score: def.regions };
+      if (!deepEquals(partitionSelection, def.annotation.selection)) {
+        partitionSelection.generation = saveGen;
+        changeSet.selection = partitionSelection;
+      }
       partitionAnnotation = AnnotationBuilder.update(def.annotation, { selection: partitionSelection, score: def.regions });
     } else {
       partitionAnnotation = AnnotationBuilder.annotation(partitionSelection, def.regions, 1, '');
@@ -116,7 +125,7 @@ export default function init(inPublicAPI, inModel) {
   }
 
   // communicate with the server which regions/dividers have changed.
-  function sendScores(def) {
+  function sendScores(def, passive = false) {
     const scoreData = dividersToPartition(def, model.scores);
     if (scoreData === null) {
       console.error('Cannot translate scores to send to provider');
@@ -124,9 +133,21 @@ export default function init(inPublicAPI, inModel) {
     }
     if (model.provider.isA('SelectionProvider')) {
       if (!scoreData.name) {
-        scoreData.name = `${scoreData.selection.partition.variable} (partition)`;
+        AnnotationBuilder.setDefaultName(scoreData);
+        if (model.provider.isA('AnnotationStoreProvider')) {
+          scoreData.name = model.provider.getNextStoredAnnotationName(scoreData.name);
+        }
       }
-      model.provider.setAnnotation(scoreData);
+      if (!passive) {
+        model.provider.setAnnotation(scoreData);
+      } else if (model.provider.isA('AnnotationStoreProvider') && model.provider.getStoredAnnotation(scoreData.id)) {
+        // Passive means we don't want to set the active annotation, but if there is
+        // a stored annotation matching these score dividers, we still need to update
+        // that stored annotation
+        model.provider.updateStoredAnnotations({
+          [scoreData.id]: scoreData,
+        });
+      }
     }
   }
 
@@ -160,19 +181,29 @@ export default function init(inPublicAPI, inModel) {
 
   publicAPI.setDefaultScorePartition = (fieldName) => {
     const def = model.fieldData[fieldName];
-    if (def) {
+    if (!def) return;
+    // possibly the best we can do - check for a threshold-like annotation
+    if (!def.lockAnnot ||
+        !(def.regions && def.regions.length === 2 && def.regions[0] === 0 && def.regions[1] === 2)) {
       // create a divider halfway through.
       const [minRange, maxRange] = getHistRange(def);
       def.dividers = [createDefaultDivider(0.5 * (minRange + maxRange), 0)];
       // set regions to 'no' | 'yes'
       def.regions = [0, 2];
-      sendScores(def);
+      // clear any existing (local) annotation
+      def.annotation = null;
       // set mode that prevents editing the annotation, except for the single divider.
       def.lockAnnot = true;
-      setEditScore(def, true);
-    } else {
-      def.lockAnnot = false;
+      sendScores(def);
     }
+    // we might already have threshold annot, but need to score it.
+    setEditScore(def, true);
+  };
+
+  publicAPI.getScoreThreshold = (fieldName) => {
+    const def = model.fieldData[fieldName];
+    if (!def.lockAnnot) console.log('Wrong mode for score threshold, arbitrary results.');
+    return def.dividers[0].value;
   };
 
   const scoredHeaderClick = (d) => {
@@ -196,6 +227,17 @@ export default function init(inPublicAPI, inModel) {
     return count;
   }
 
+  function annotationSameAsStored(annotation) {
+    const storedAnnot = model.provider.getStoredAnnotation(annotation.id);
+    if (!storedAnnot) return false;
+    if (annotation.generation === storedAnnot.generation) return true;
+    const savedGen = annotation.generation;
+    annotation.generation = storedAnnot.generation;
+    const ret = deepEquals(annotation, storedAnnot);
+    annotation.generation = savedGen;
+    return ret;
+  }
+
   function createScoreIcons(iconCell) {
     if (!enabled()) return;
     // create/save partition annotation
@@ -206,9 +248,7 @@ export default function init(inPublicAPI, inModel) {
           .on('click', (d) => {
             if (model.provider.getStoredAnnotation) {
               const annotation = d.annotation;
-              const isSame = model.provider.getStoredAnnotation(annotation.id)
-                ? (annotation.generation === model.provider.getStoredAnnotation(annotation.id).generation)
-                : false;
+              const isSame = annotationSameAsStored(annotation);
               if (!isSame) {
                 model.provider.setStoredAnnotation(annotation.id, annotation);
               } else {
@@ -237,7 +277,7 @@ export default function init(inPublicAPI, inModel) {
       // new/modified/unmodified annotation...
       if (def.annotation) {
         if (model.provider.getStoredAnnotation(def.annotation.id)) {
-          const isSame = (def.annotation.generation === model.provider.getStoredAnnotation(def.annotation.id).generation);
+          const isSame = annotationSameAsStored(def.annotation);
           if (isSame) {
             const isActive = (def.annotation === model.provider.getAnnotation());
             iconCell.select(`.${style.jsSaveIcon}`)
@@ -262,7 +302,7 @@ export default function init(inPublicAPI, inModel) {
     // Override icon if disabled
     if (publicAPI.isFieldActionDisabled(def.name, 'save')) {
       iconCell.select(`.${style.jsSaveIcon}`)
-        .attr('class', style.hideSaveIcon);
+        .attr('class', style.noSaveIcon);
     }
 
     if (publicAPI.isFieldActionDisabled(def.name, 'score')) {
@@ -724,6 +764,10 @@ export default function init(inPublicAPI, inModel) {
       .attr('type', 'number')
       .attr('step', 'any')
       .style('width', '6em');
+    if (!model.showUncertainty) {
+      // if we aren't supposed to show uncertainty, hide this row.
+      tr2.style('display', 'none');
+    }
     dPopupDiv
       .append('div').classed(style.scoreDashSpacer, true);
     dPopupDiv
@@ -859,20 +903,25 @@ export default function init(inPublicAPI, inModel) {
   function rescaleDividers(paramName, oldRangeMin, oldRangeMax) {
     if (model.fieldData[paramName] && model.fieldData[paramName].hobj) {
       const def = model.fieldData[paramName];
-      const hobj = model.fieldData[paramName].hobj;
-      if (hobj.min !== oldRangeMin || hobj.max !== oldRangeMax) {
-        def.dividers.forEach((divider, index) => {
-          if (oldRangeMax === oldRangeMin) {
-            // space dividers evenly in the middle - i.e. punt.
-            divider.value = (((index + 1) / (def.dividers.length + 1)) *
-                             (hobj.max - hobj.min)) + hobj.min;
-          } else {
-            // this set the divider to hobj.min if the new hobj.min === hobj.max.
-            divider.value = (((divider.value - oldRangeMin) / (oldRangeMax - oldRangeMin)) *
-                             (hobj.max - hobj.min)) + hobj.min;
-          }
-        });
-        sendScores(def);
+      // Since we come in here whenever a new histogram gets pushed to the histo
+      // selector, avoid rescaling dividers unless there is actually a partition
+      // annotation on this field.
+      if (showScore(def)) {
+        const hobj = model.fieldData[paramName].hobj;
+        if (hobj.min !== oldRangeMin || hobj.max !== oldRangeMax) {
+          def.dividers.forEach((divider, index) => {
+            if (oldRangeMax === oldRangeMin) {
+              // space dividers evenly in the middle - i.e. punt.
+              divider.value = (((index + 1) / (def.dividers.length + 1)) *
+                               (hobj.max - hobj.min)) + hobj.min;
+            } else {
+              // this set the divider to hobj.min if the new hobj.min === hobj.max.
+              divider.value = (((divider.value - oldRangeMin) / (oldRangeMax - oldRangeMin)) *
+                               (hobj.max - hobj.min)) + hobj.min;
+            }
+          });
+          sendScores(def, true);
+        }
       }
     }
   }
@@ -1106,6 +1155,11 @@ export default function init(inPublicAPI, inModel) {
       model.subscriptions.push(model.provider.onAnnotationChange((annotation) => {
         if (annotation.selection.type === 'partition') {
           const field = annotation.selection.partition.variable;
+          // ignore annotation if it's read-only and we aren't
+          if (annotation.readOnly && model.readOnlyFields.indexOf(field) === -1) return;
+          // Vice-versa: single mode, displaying read-only, ignore external annots.
+          if (!annotation.readOnly && model.fieldData[field].lockAnnot) return;
+
           // respond to annotation.
           model.fieldData[field].annotation = annotation;
           partitionToDividers(annotation, model.fieldData[field], model.scores);
@@ -1134,6 +1188,13 @@ export default function init(inPublicAPI, inModel) {
     }
   }
 
+  function clearFieldAnnotation(fieldName) {
+    model.fieldData[fieldName].annotation = null;
+    model.fieldData[fieldName].dividers = undefined;
+    model.fieldData[fieldName].regions = [model.defaultScore];
+    model.fieldData[fieldName].editScore = false;
+  }
+
   return {
     addSubscriptions,
     createGroups,
@@ -1151,6 +1212,7 @@ export default function init(inPublicAPI, inModel) {
     rescaleDividers,
     updateHeader,
     updateFieldAnnotations,
+    clearFieldAnnotation,
     updateScoreIcons,
   };
 }

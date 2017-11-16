@@ -51,6 +51,14 @@
   box-sizing: border-box;
 }
 
+/* fix a chrome bug with scrolling - must be rendered, full-height */
+.parameterScrollFix {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  width: 1px;
+}
+
 .header {
   composes: jsHeader;
   font-family: "Optima", "Linux Biolinum", "URW Classico", sans;
@@ -140,8 +148,9 @@
 }
 
 .legendIcon {
+  composes: fa-lg from 'font-awesome/css/font-awesome.css';
   vertical-align: middle;
-  padding: 1px 2px;
+  padding: 1px 1px;
 }
 .expandIcon {
   composes: jsExpandIcon;
@@ -175,31 +184,30 @@
   display: none;
 }
 
-.noSaveIcon {
+.saveIcon {
   composes: jsSaveIcon;
   composes: icon;
   composes: legendIcon;
 }
+.noSaveIcon {
+  composes: saveIcon;
+  display: none;
+}
 .unchangedSaveIcon {
-  composes: noSaveIcon;
+  composes: saveIcon;
   composes: fa-bookmark-o from 'font-awesome/css/font-awesome.css';
 }
 .unchangedActiveSaveIcon {
-  composes: noSaveIcon;
+  composes: saveIcon;
   composes: fa-bookmark from 'font-awesome/css/font-awesome.css';
 }
 .modifiedSaveIcon {
-  composes: noSaveIcon;
+  composes: saveIcon;
   composes: fa-floppy-o from 'font-awesome/css/font-awesome.css';
 }
 .newSaveIcon {
-  composes: noSaveIcon;
+  composes: saveIcon;
   composes: fa-plus from 'font-awesome/css/font-awesome.css';
-}
-
-.hideSaveIcon {
-  composes: jsSaveIcon;
-  display: none;
 }
 
 .histogramSelectorCell {

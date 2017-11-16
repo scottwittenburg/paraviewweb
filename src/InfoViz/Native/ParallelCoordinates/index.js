@@ -323,20 +323,21 @@ function parallelCoordinate(publicAPI, model) {
 
       const glyphGroup = svg
         .selectAll('g.glyphs')
-        .data(labelDataModel);
+        .data(labelDataModel, d => (d ? d.name : 'none'));
 
       glyphGroup.exit().remove();
 
-      glyphGroup
+      const glyphEnter = glyphGroup
         .enter()
         .append('g')
         .classed('glyphs', true);
 
       // Create nested structure
-      const svgGroup = glyphGroup.selectAll('svg').data([0]);
-      svgGroup.enter().append('svg');
-      const useGroup = svgGroup.selectAll('use').data([0]);
-      useGroup.enter().append('use');
+      const svgGroup = glyphEnter.append('svg');
+      svgGroup.append('use');
+
+      // add a tooltip
+      glyphEnter.append('title').text(d => (d.name));
 
       glyphGroup
         .attr('transform', (d, i) => `translate(${d.centerX - (glyphSize * 0.5)}, ${glyphPadding})`)
@@ -346,7 +347,7 @@ function parallelCoordinate(publicAPI, model) {
           }
         });
 
-      glyphGroup.each(function applyLegendStyle(d, i) {
+      glyphEnter.each(function applyLegendStyle(d, i) {
         d3.select(this)
           .select('svg')
           .attr('fill', d.legend.color)
@@ -724,10 +725,8 @@ function parallelCoordinate(publicAPI, model) {
 
   publicAPI.setScores = (scores) => {
     model.scores = scores;
-    if (!model.visibleScores && scores) {
-      publicAPI.setVisibleScoresForSelection(scores.map((score, idx) => idx));
-    }
     if (model.scores) {
+      publicAPI.setVisibleScoresForSelection(scores.map((score, idx) => idx));
       model.scores.forEach((score, idx) => {
         scoreToColor[idx] = toColorArray(score.color);
       });
@@ -851,6 +850,14 @@ function parallelCoordinate(publicAPI, model) {
       model.axes.updateAxes(model.provider.getActiveFieldNames().map(name =>
         ({ name, range: model.provider.getField(name).range })
       ));
+
+      if (model.provider.isA('Histogram2DProvider')) {
+        model.histogram2DDataSubscription.update(model.axes.getAxesPairs());
+      }
+
+      if (model.provider.isA('SelectionProvider')) {
+        model.selectionDataSubscription.update(model.axes.getAxesPairs());
+      }
     }));
     // Use initial state
     model.axes.updateAxes(model.provider.getActiveFieldNames().map(name =>
@@ -972,6 +979,13 @@ function parallelCoordinate(publicAPI, model) {
           lastAnnotationPushed = AnnotationBuilder.EMPTY_ANNOTATION;
         } else if (!lastAnnotationPushed || model.provider.shouldCreateNewAnnotation() || lastAnnotationPushed.selection.type !== 'range') {
           lastAnnotationPushed = AnnotationBuilder.annotation(selection, [model.defaultScore], model.defaultWeight);
+          if (lastAnnotationPushed.name === '') {
+            // set default range annotation name
+            AnnotationBuilder.setDefaultName(lastAnnotationPushed);
+            if (model.provider.isA('AnnotationStoreProvider')) {
+              lastAnnotationPushed.name = model.provider.getNextStoredAnnotationName(lastAnnotationPushed.name);
+            }
+          }
         } else {
           lastAnnotationPushed = AnnotationBuilder.update(lastAnnotationPushed, {
             selection,
