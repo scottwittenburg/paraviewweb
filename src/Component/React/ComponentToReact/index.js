@@ -10,34 +10,39 @@ export default class ComponentToReact extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.component) {
-      this.props.component.setContainer(this.container);
-      this.props.component.resize();
+    const { component } = this.props;
+    if (component) {
+      component.setContainer(this.container);
+      component.resize();
     }
   }
 
   componentDidUpdate() {
-    if (this.props.component) {
-      this.props.component.resize();
+    const { component } = this.props;
+    if (component) {
+      component.resize();
     }
   }
 
   componentWillUnmount() {
-    if (this.props.component) {
-      this.props.component.setContainer(null);
+    const { component } = this.props;
+    if (component) {
+      component.setContainer(null);
     }
   }
 
   resize() {
-    if (this.props.component) {
-      this.props.component.resize();
+    const { component } = this.props;
+    if (component) {
+      component.resize();
     }
   }
 
   render() {
+    const { className } = this.props;
     return (
       <div
-        className={this.props.className}
+        className={className}
         ref={(c) => {
           this.container = c;
         }}

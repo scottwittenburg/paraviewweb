@@ -7,13 +7,17 @@ function identity(i) {
 function toNativeType(str) {
   if (str === null || str === 'null') {
     return null;
-  } else if (str === 'true') {
+  }
+  if (str === 'true') {
     return true;
-  } else if (str === 'false') {
+  }
+  if (str === 'false') {
     return false;
-  } else if (str === undefined || str === 'undefined') {
+  }
+  if (str === undefined || str === 'undefined') {
     return undefined;
-  } else if (str === '' || Number.isNaN(Number(str))) {
+  }
+  if (str === '' || Number.isNaN(Number(str))) {
     return str;
   }
   return parseFloat(str);

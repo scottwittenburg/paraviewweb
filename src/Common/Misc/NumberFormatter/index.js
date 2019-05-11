@@ -76,11 +76,14 @@ export default class NumberFormatter {
     // I. Handle special numbers:
     if (num === 0.0) {
       return '0';
-    } else if (num === Infinity) {
+    }
+    if (num === Infinity) {
       return '∞';
-    } else if (num === -Infinity) {
+    }
+    if (num === -Infinity) {
       return '-∞';
-    } else if (Number.isNaN(num)) {
+    }
+    if (Number.isNaN(num)) {
       return 'NaN';
     }
     const szn = Math.log10(Math.abs(num));
