@@ -19,47 +19,43 @@ export default class FloatImageControlLayerItem extends React.Component {
   }
 
   toggleMesh() {
-    if (this.props.item.hasMesh) {
-      this.props.model.updateMaskLayerVisibility(
-        this.props.item.name,
-        !this.props.item.meshActive
-      );
-      this.setState({ change: !this.state.change });
+    const { item, model } = this.props;
+    if (item.hasMesh) {
+      model.updateMaskLayerVisibility(item.name, !item.meshActive);
+      this.setState((prevState) => ({ change: !prevState.change }));
     }
   }
 
   toggleVisibility() {
-    this.props.model.updateLayerVisibility(
-      this.props.item.name,
-      !this.props.item.active
-    );
-    this.setState({ change: !this.state.change });
+    const { item, model } = this.props;
+    model.updateLayerVisibility(item.name, !item.active);
+    this.setState((prevState) => ({ change: !prevState.change }));
   }
 
   toggleDropDown() {
-    if (this.props.item.arrays.length > 1) {
-      this.setState({ dropDown: !this.state.dropDown });
+    const { item } = this.props;
+    if (item.arrays.length > 1) {
+      this.setState((prevState) => ({ dropDown: !prevState.dropDown }));
     }
   }
 
   updateColorBy(event) {
-    this.props.model.updateLayerColorBy(
-      this.props.item.name,
-      event.target.dataset.color
-    );
+    const { item, model } = this.props;
+    model.updateLayerColorBy(item.name, event.target.dataset.color);
     this.toggleDropDown();
   }
 
   render() {
-    const layer = this.props.item;
-    const visible = layer.active;
-    const meshVisible = layer.meshActive;
-    const meshAvailable = layer.hasMesh;
-    const hasDropDown = layer.arrays.length > 1;
+    const { item } = this.props;
+    const visible = item.active;
+    const meshVisible = item.meshActive;
+    const meshAvailable = item.hasMesh;
+    const hasDropDown = item.arrays.length > 1;
+    const { dropDown } = this.state;
 
     return (
       <div className={style.item}>
-        <div className={style.sceneLabel}>{layer.name}</div>
+        <div className={style.sceneLabel}>{item.name}</div>
         <div className={style.sceneActions}>
           <i
             className={
@@ -83,16 +79,14 @@ export default class FloatImageControlLayerItem extends React.Component {
           />
           <div
             onClick={this.updateColorBy}
-            className={this.state.dropDown ? style.menu : style.hidden}
+            className={dropDown ? style.menu : style.hidden}
           >
-            {layer.arrays.map((color) => (
+            {item.arrays.map((color) => (
               <div
                 key={color}
                 data-color={color}
                 className={
-                  color === layer.array
-                    ? style.selectedMenuItem
-                    : style.menuItem
+                  color === item.array ? style.selectedMenuItem : style.menuItem
                 }
               >
                 {color}

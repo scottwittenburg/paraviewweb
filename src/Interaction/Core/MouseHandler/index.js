@@ -107,7 +107,9 @@ export default class MouseHandler {
         ['mousemove', 'mouseup'].indexOf(e.type) !== -1
       ) {
         return true;
-      } else if (e.type === 'contextmenu') {
+      }
+
+      if (e.type === 'contextmenu') {
         this.inRightClickHandling = true;
       }
 

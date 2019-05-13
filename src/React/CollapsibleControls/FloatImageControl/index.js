@@ -27,26 +27,30 @@ export default class FloatImageControl extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const previous = this.props.model;
-    const next = nextProps.model;
+    const { model } = this.props;
+    const nextModel = nextProps.model;
 
-    if (previous !== next) {
+    if (model !== nextModel) {
       this.detachListener();
-      this.attachListener(next);
+      this.attachListener(nextModel);
 
       // Force redraw
-      this.setState({ change: !this.state.change });
+      this.setState((prevState) => ({ change: !prevState.change }));
     }
   }
 
   onProbeChange(e) {
+    const { model } = this.props;
     const name = e.target.name;
     const newVal = Number(e.target.value);
-    const newState = { x: this.state.x, y: this.state.y };
+    const { x, y } = this.state;
 
-    newState[name] = newVal;
-    this.setState(newState);
-    this.props.model.getTimeChart(newState.x, newState.y);
+    this.setState((prevState) => ({
+      x: prevState.x,
+      y: prevState.y,
+      [name]: newVal,
+    }));
+    model.getTimeChart(x, y);
   }
 
   attachListener(model) {
@@ -63,37 +67,38 @@ export default class FloatImageControl extends React.Component {
   }
 
   updateLight(event) {
-    this.props.model.setLight(255 - event.target.value);
-    this.setState({ change: !this.state.change });
+    const { model } = this.props;
+    model.setLight(255 - event.target.value);
+    this.setState((prevState) => ({ change: !prevState.change }));
   }
 
   toggleProbe(newVal) {
-    this.props.model.getTimeProbe().enabled = !!newVal;
+    const { model } = this.props;
+    model.getTimeProbe().enabled = !!newVal;
 
-    if (this.props.model.getTimeProbe().enabled) {
-      this.props.model.getTimeChart();
+    if (model.getTimeProbe().enabled) {
+      model.getTimeChart();
     }
 
-    this.setState({ change: !this.state.change });
+    this.setState((prevState) => ({ change: !prevState.change }));
 
-    this.props.model.getTimeProbe().triggerChange();
-    this.props.model.render();
+    model.getTimeProbe().triggerChange();
+    model.render();
   }
 
   render() {
-    const floatImageModel = this.props.model;
-    const timeProbe = floatImageModel.getTimeProbe();
-    const width = floatImageModel.dimensions[0];
-    const height = floatImageModel.dimensions[1];
+    const { model } = this.props;
+    const timeProbe = model.getTimeProbe();
+    const width = model.dimensions[0];
+    const height = model.dimensions[1];
+    const { x, y } = this.state;
 
     return (
       <div className={style.container}>
         <CollapsibleWidget title="Scene">
-          {floatImageModel
-            .getLayers()
-            .map((item, idx) => (
-              <LayerItem key={idx} item={item} model={floatImageModel} />
-            ))}
+          {model.getLayers().map((item, idx) => (
+            <LayerItem key={idx} item={item} model={model} />
+          ))}
           <div className={style.item}>
             <div className={style.label}>Light</div>
             <div className={style.actions}>
@@ -102,7 +107,7 @@ export default class FloatImageControl extends React.Component {
                 type="range"
                 min="0"
                 max="128"
-                value={255 - floatImageModel.getLight()}
+                value={255 - model.getLight()}
                 onChange={this.updateLight}
               />
             </div>
@@ -112,7 +117,7 @@ export default class FloatImageControl extends React.Component {
           title="Time probe"
           open={timeProbe.enabled}
           subtitle={timeProbe.enabled ? (timeProbe.value || 0).toString() : ''}
-          visible={floatImageModel.isMultiView()}
+          visible={model.isMultiView()}
           onChange={this.toggleProbe}
         >
           <div className={style.item}>
@@ -123,7 +128,7 @@ export default class FloatImageControl extends React.Component {
                 min={0.0}
                 max={width}
                 key="x"
-                value={this.state.x}
+                value={x}
                 name="x"
                 onChange={this.onProbeChange}
               />
@@ -137,7 +142,7 @@ export default class FloatImageControl extends React.Component {
                 min={0.0}
                 max={height}
                 key="y"
-                value={this.state.y}
+                value={y}
                 name="y"
                 onChange={this.onProbeChange}
               />

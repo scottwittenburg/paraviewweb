@@ -20,32 +20,37 @@ export default class LightControl extends React.Component {
   }
 
   onLightTermsChange(newVal, name) {
+    const { light } = this.props;
     const newState = {};
     newState[name] = newVal;
     this.setState(newState);
     setImmediate(() => {
-      this.props.light.setLightProperties({
+      light.setLightProperties({
         lightTerms: newState,
       });
     });
   }
 
   onLightPositionChange(event) {
-    this.props.light.setLightProperties({
+    const { light } = this.props;
+    light.setLightProperties({
       lightPosition: event,
     });
   }
 
   toggleLight(enabled) {
-    this.props.light.setLightingEnabled(enabled);
+    const { light } = this.props;
+    light.setLightingEnabled(enabled);
   }
 
   render() {
+    const { light } = this.props;
+    const { ka, kd, ks, alpha } = this.state;
     const lightButton = (
       <LightButton
         key="enable-light-button"
         onChange={this.toggleLight}
-        value={this.props.light.getLightingEnabled()}
+        value={light.getLightingEnabled()}
       />
     );
     return (
@@ -70,7 +75,7 @@ export default class LightControl extends React.Component {
                 min={0.0}
                 max={1.0}
                 key="ka"
-                value={this.state.ka}
+                value={ka}
                 name="ka"
                 onChange={this.onLightTermsChange}
               />
@@ -83,7 +88,7 @@ export default class LightControl extends React.Component {
                 min={0.0}
                 max={1.0}
                 key="kd"
-                value={this.state.kd}
+                value={kd}
                 name="kd"
                 onChange={this.onLightTermsChange}
               />
@@ -96,7 +101,7 @@ export default class LightControl extends React.Component {
                 min={0.0}
                 max={1.0}
                 key="ks"
-                value={this.state.ks}
+                value={ks}
                 name="ks"
                 onChange={this.onLightTermsChange}
               />
@@ -109,7 +114,7 @@ export default class LightControl extends React.Component {
                 min={0.0}
                 max={100}
                 key="alpha"
-                value={this.state.alpha}
+                value={alpha}
                 name="alpha"
                 onChange={this.onLightTermsChange}
               />

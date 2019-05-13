@@ -25,37 +25,45 @@ const LAYOUT_VIEW = {
 };
 
 export default function render(props) {
-  const options = Object.keys(props.viewports).map((name, idx) => (
+  const {
+    viewports,
+    count,
+    onViewportChange,
+    activeLayout,
+    onLayoutChange,
+  } = props;
+
+  const options = Object.keys(viewports).map((name, idx) => (
     <option key={idx} value={name}>
       {name}
     </option>
   ));
   const mapping = [];
-  while (mapping.length < props.count) {
+  while (mapping.length < count) {
     mapping.push('None');
   }
-  Object.keys(props.viewports).forEach((name) => {
-    if (props.viewports[name].viewport !== -1) {
-      mapping[props.viewports[name].viewport] = name;
+  Object.keys(viewports).forEach((name) => {
+    if (viewports[name].viewport !== -1) {
+      mapping[viewports[name].viewport] = name;
     }
   });
-  while (mapping.length > props.count) {
+  while (mapping.length > count) {
     mapping.pop();
   }
 
   function changeViewport(event) {
     const idx = Number(event.currentTarget.getAttribute('name'));
     const name = event.currentTarget.value;
-    props.onViewportChange(idx, props.viewports[name].component);
+    onViewportChange(idx, viewports[name].component);
   }
-  const LayoutItem = LAYOUT_VIEW[props.activeLayout];
+  const LayoutItem = LAYOUT_VIEW[activeLayout];
 
   return (
     <div className={style.container}>
       <LayoutsWidget
         className={style.layout}
-        onChange={props.onLayoutChange}
-        active={props.activeLayout}
+        onChange={onLayoutChange}
+        active={activeLayout}
       />
       {mapping.map((name, idx) => (
         <section key={idx} className={style.line}>
